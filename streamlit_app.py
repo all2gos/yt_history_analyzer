@@ -15,6 +15,7 @@ Aby poddać analizie waszą historię YT musicie dysponować
 """
 df = pd.DataFrame()
 file = st.file_uploader("Tutaj wklej swoją historię")
+lsmode = st.button('Usuń wszystkie filmy poza LSowymi')
 st.button()
 if file is not None:
     df = pd.read_json(file)     
@@ -39,7 +40,7 @@ if file is not None:
         df['time'].iloc[item] = df['time'].iloc[item][:10]
         df['wideo'].iloc[item] = df['title'].iloc[item][10:]        
 
-    if st.button('LS mode on'):
+    if lsmode:
         df = df[df['subtitles']=='Lekko Stronniczy']
     
     st.write('Najczęściej oglądane wideo')
