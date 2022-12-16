@@ -15,7 +15,6 @@ Aby poddać analizie waszą historię YT musicie dysponować
 """
 df = pd.DataFrame()
 file = st.file_uploader("Tutaj wklej swoją historię")
-st.button()
 if file is not None:
     df = pd.read_json(file)     
     df = df.drop(['products','activityControls','description','details'], axis = 1)
