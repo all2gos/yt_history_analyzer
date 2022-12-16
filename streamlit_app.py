@@ -37,7 +37,10 @@ if file is not None:
         df['year_month'].iloc[item] = df['time'].iloc[item][:7]
         df['time'].iloc[item] = df['time'].iloc[item][:10]
 
-cols = st.multiselect('select columns:',df['titles'],default=[])
-st.write(df[cols].head())
+cols = st.multiselect('select columns:', df.columns, default=[])
+st.write('You selected:', cols)
+
+# show dataframe with the selected columns
+st.write(df[cols])
 
 
