@@ -43,28 +43,6 @@ def data_preprocessing():
     
     return df
 
-
-
-
-
 df = data_preprocessing()
 
-
-
-top_channels = df['subtitles'].value_counts()
-top_videos = df['title'].value_counts()
-top_ls = df['title'][df['subtitles']=='Lekko Stronniczy'].value_counts()
-
-st.write('Most watched videos of all time:')
-
-st.write(top_videos.head(10))
-
-
-st.write('Most watched channels of all time')
-
-st.write(top_channels.head(20))
-
-
-st.write('Most watched LS videos of all time')
-
-st.write(top_ls.head(20))
+st.write(df.head(10))
