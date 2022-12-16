@@ -38,3 +38,5 @@ if file is not None:
         df['time'].iloc[item] = df['time'].iloc[item][:10]
 
 st.write(df.columns)
+print('test')
+print(df['title'].head())
