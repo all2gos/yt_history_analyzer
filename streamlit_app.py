@@ -37,10 +37,10 @@ if file is not None:
         df['year_month'].iloc[item] = df['time'].iloc[item][:7]
         df['time'].iloc[item] = df['time'].iloc[item][:10]
 
-cols = st.multiselect('select columns:', df.columns, default=[])
-st.write('You selected:', cols)
+cols = st.multiselect('Wybierz czy chcesz segregować po wideo, czy po kanałach:', ['titles','subtitles'], default=[])
+st.write('Wybrałxś:', cols)
 
 # show dataframe with the selected columns
-st.write(df[cols])
+st.write(df[cols].value_counts())
 
 
