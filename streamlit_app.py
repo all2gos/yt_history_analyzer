@@ -14,7 +14,7 @@ Aby poddać analizie waszą historię YT musicie dysponować
 [plikiem w formacie JSON z waszą historię oglądania](https://www.youtube.com/watch?v=zlzzO1e6dws)
 """
 
-cols = st.multiselect('Wybierz czy chcesz segregować po wideo, czy po kanałach:', ['titles','subtitles'], default=[])
+cols = st.multiselect('Wybierz czy chcesz zobaczyć top wideo top oglądane kanały:', ['titles','subtitles'], default=[])
 st.write('Wybrałxś:', cols)
 
 df = pd.DataFrame()
@@ -43,6 +43,6 @@ if file is not None:
 
 
 # show dataframe with the selected columns
-st.write(df[cols].value_counts())
+st.write(df.columns)
 
 
