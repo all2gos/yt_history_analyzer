@@ -13,7 +13,6 @@ Stworzyłem tą aplikację po to, aby odpowiedzieć na pytania, których nigdy n
 Aby poddać analizie waszą historię YT musicie dysponować 
 [plikiem w formacie JSON z historią oglądania](https://www.youtube.com/watch?v=zlzzO1e6dws)
 """
-
 df = pd.DataFrame()
 file = st.file_uploader("Choose a file")
 if file is not None:
