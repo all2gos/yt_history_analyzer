@@ -37,6 +37,6 @@ if file is not None:
         df['year_month'].iloc[item] = df['time'].iloc[item][:7]
         df['time'].iloc[item] = df['time'].iloc[item][:10]
 
-st.write(df.columns)
-print('test')
+st.write(df['subtitles'])
+
 
