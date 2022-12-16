@@ -14,9 +14,6 @@ Aby poddać analizie waszą historię YT musicie dysponować
 [plikiem w formacie JSON z historią oglądania](https://www.youtube.com/watch?v=zlzzO1e6dws)
 """
 
-cols = st.multiselect('Wybierz czy chcesz zobaczyć top wideo top oglądane kanały:', ['wideo','kanal'], default=[])
-st.write('Wybrałxś:', cols)
-
 df = pd.DataFrame()
 file = st.file_uploader("Choose a file")
 if file is not None:
@@ -31,7 +28,7 @@ if file is not None:
     df['month'] = pd.DatetimeIndex(df['time']).month
     df['year_month'] = df['time']
     df['wideo'] = df['time']
-    df['kanal'] = df['subtitles']
+    df['kanal'] = df['time']
 
     st.write('W wyniku usuwania uszkodzonych informacji,', len_1-len_2, 'pozycji z historii zostało usuniętych')
     st.write('Konwertowanie pliku JSON trwa. Proszę o cierpliwość ten proces może trwać 2-3 minuty')
@@ -42,11 +39,15 @@ if file is not None:
         df['year_month'].iloc[item] = df['time'].iloc[item][:7]
         df['time'].iloc[item] = df['time'].iloc[item][:10]
         df['wideo'].iloc[item] = df['title'].iloc[item][10:]
-
+        df['kanal'].iloc[item] = df['subtitles'].iloc[item][10:]
 
 # show dataframe with the selected columns
 st.write(df.columns)
 st.write(df.head(10))
+
+cols = st.multiselect('Wybierz czy chcesz zobaczyć top wideo top oglądane kanały:', ['wideo','kanal'], default=[])
+st.write('Wybrałxś:', cols)
+st.write(df[cols].head(3))
 
 
 
