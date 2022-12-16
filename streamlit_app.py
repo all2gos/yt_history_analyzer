@@ -20,7 +20,7 @@ def data_preprocessing():
     files = st.file_uploader("Choose a file")
     if files is not None:
         for file in files:
-            with open(pwd + '/' + file,'r',encoding='utf-8') as f:
+            with open(file,'r',encoding='utf-8') as f:
                 data = json.loads(f.read())
                 df_new_row = pd.DataFrame(pd.json_normalize(data))
                 df = pd.concat([df,df_new_row])
