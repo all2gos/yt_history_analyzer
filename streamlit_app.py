@@ -11,10 +11,10 @@ st.title('LSowa analiza')
 Stworzyłem tą aplikację po to, aby odpowiedzieć na pytania, których nigdy nawet nie zadaliście.
 
 Aby poddać analizie waszą historię YT musicie dysponować 
-[plikiem w formacie JSON z waszą historię oglądania](https://www.youtube.com/watch?v=zlzzO1e6dws)
+[plikiem w formacie JSON z historią oglądania](https://www.youtube.com/watch?v=zlzzO1e6dws)
 """
 
-cols = st.multiselect('Wybierz czy chcesz zobaczyć top wideo top oglądane kanały:', ['titles','subtitles'], default=[])
+cols = st.multiselect('Wybierz czy chcesz zobaczyć top wideo top oglądane kanały:', ['wideo','kanal'], default=[])
 st.write('Wybrałxś:', cols)
 
 df = pd.DataFrame()
@@ -30,6 +30,8 @@ if file is not None:
     df['year'] = pd.DatetimeIndex(df['time']).year
     df['month'] = pd.DatetimeIndex(df['time']).month
     df['year_month'] = df['time']
+    df['wideo'] = df['time']
+    df['kanal'] = df['subtitles']
 
     st.write('W wyniku usuwania uszkodzonych informacji,', len_1-len_2, 'pozycji z historii zostało usuniętych')
     st.write('Konwertowanie pliku JSON trwa. Proszę o cierpliwość ten proces może trwać 2-3 minuty')
@@ -39,10 +41,12 @@ if file is not None:
         df['hour'].iloc[item] = df['time'].iloc[item][11:13]
         df['year_month'].iloc[item] = df['time'].iloc[item][:7]
         df['time'].iloc[item] = df['time'].iloc[item][:10]
-
+        df['wideo'].iloc[item] = df['title'].iloc[item][10:]
 
 
 # show dataframe with the selected columns
 st.write(df.columns)
+st.write(df.head(10))
+st.write(df[cols].head(3))
 
 
