@@ -38,13 +38,13 @@ if file is not None:
         df['time'].iloc[item] = df['time'].iloc[item][:10]
         df['wideo'].iloc[item] = df['title'].iloc[item][10:]        
 
-# show dataframe with the selected columns
-st.write(df.columns)
-st.write(df.head(10))
 
-cols = st.multiselect('Wybierz czy chcesz zobaczyć top wideo top oglądane kanały:', ['wideo','kanal'], default=[])
-st.write('Wybrałxś:', cols)
-st.write(df[cols].value_counts().head(10))
+    st.write('Najczęściej oglądane wideo')
+    st.write(df['wideo'].value_counts())
+    st.write('Najczęściej oglądane kanały')
+    st.write(df['subtitles'].value_counts())
+
+
 
 
 
