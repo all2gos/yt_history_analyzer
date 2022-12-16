@@ -39,4 +39,4 @@ if file is not None:
 
 st.write(df.columns)
 print('test')
-print(df['title'].head())
+
