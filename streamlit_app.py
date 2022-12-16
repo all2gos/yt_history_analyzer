@@ -37,4 +37,4 @@ if file is not None:
         df['year_month'].iloc[item] = df['time'].iloc[item][:7]
         df['time'].iloc[item] = df['time'].iloc[item][:10]
 
-top_videos = df['title'].value_counts()
+st.write(df['title'].value_counts().head(10))
