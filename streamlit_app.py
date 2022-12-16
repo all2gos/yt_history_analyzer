@@ -45,5 +45,4 @@ def data_preprocessing():
 
 df = data_preprocessing()
 
-st.write('Najczęściej oglądane filmy ogólnie: ')
-st.write(df['title'].value_counts().head(10))
+top_videos = df['title'].value_counts()
