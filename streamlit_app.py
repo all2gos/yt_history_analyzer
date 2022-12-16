@@ -30,8 +30,8 @@ def data_preprocessing():
         df['month'] = pd.DatetimeIndex(df['time']).month
         df['year_month'] = df['time']
 
-        st.write('As a result of deleting damaged entries,', len_1-len_2, 'information about videos have been lost')
-        st.write('Converting json file into df are processing. Be patient, this process may take up to 2-3 minutes')
+        st.write('W wyniku usuwania uszkodzonych informacji,', len_1-len_2, 'pozycji z historii zostało usuniętych')
+        st.write('Konwertowanie pliku JSON trwa. Proszę o cierpliwość ten proces może trwać 2-3 minuty')
 
         for item in range(len(df)):
             df['subtitles'].iloc[item] = df['subtitles'].iloc[item][0]['name']
@@ -45,4 +45,5 @@ def data_preprocessing():
 
 df = data_preprocessing()
 
-st.write(df.head(10))
+st.write('Najczęściej oglądane filmy ogólnie: ')
+st.write(df['title'].value_counts().head(10))
