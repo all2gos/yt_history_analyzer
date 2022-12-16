@@ -44,7 +44,7 @@ st.write(df.head(10))
 
 cols = st.multiselect('Wybierz czy chcesz zobaczyć top wideo top oglądane kanały:', ['wideo','kanal'], default=[])
 st.write('Wybrałxś:', cols)
-st.write(df[cols].value_counts())
+st.write(df[cols].value_counts().head(10))
 
 
 
