@@ -47,6 +47,6 @@ if file is not None:
 # show dataframe with the selected columns
 st.write(df.columns)
 st.write(df.head(10))
-st.write(df[cols].head(3))
+st.write(df[cols])
 
 
