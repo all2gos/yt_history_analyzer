@@ -39,14 +39,18 @@ if file is not None:
         df['year_month'].iloc[item] = df['time'].iloc[item][:7]
         df['time'].iloc[item] = df['time'].iloc[item][:10]
         df['wideo'].iloc[item] = df['title'].iloc[item][10:]        
-
-    if lsmode:
-        df = df[df['subtitles']=='Lekko Stronniczy']
-    
+       
     st.write('Najczęściej oglądane wideo')
     st.write(df['wideo'].value_counts())
     st.write('Najczęściej oglądane kanały')
     st.write(df['subtitles'].value_counts())
+
+
+    st.write('Dane dla LSa')
+    df = df[df['subtitles']=='Lekko Stronniczy']
+    st.write('Najczęściej oglądany LS')
+    st.write(df['wideo'].value_counts())
+    
 
 
 
