@@ -11,9 +11,12 @@ st.title('LSowa analiza')
 Stworzyłem tą aplikację po to, aby odpowiedzieć na pytania, których nigdy nawet nie zadaliście.
 
 Aby poddać analizie waszą historię YT musicie dysponować 
-[plikiem w formacie JSON zawierający waszą historię oglądania](https://www.youtube.com/watch?v=zlzzO1e6dws)
+[plikiem w formacie JSON z waszą historię oglądania](https://www.youtube.com/watch?v=zlzzO1e6dws)
 """
-   
+
+cols = st.multiselect('Wybierz czy chcesz segregować po wideo, czy po kanałach:', ['titles','subtitles'], default=[])
+st.write('Wybrałxś:', cols)
+
 df = pd.DataFrame()
 file = st.file_uploader("Choose a file")
 if file is not None:
@@ -37,8 +40,7 @@ if file is not None:
         df['year_month'].iloc[item] = df['time'].iloc[item][:7]
         df['time'].iloc[item] = df['time'].iloc[item][:10]
 
-cols = st.multiselect('Wybierz czy chcesz segregować po wideo, czy po kanałach:', ['titles','subtitles'], default=[])
-st.write('Wybrałxś:', cols)
+
 
 # show dataframe with the selected columns
 st.write(df[cols].value_counts())
