@@ -14,8 +14,6 @@ Aby poddać analizie waszą historię YT musicie dysponować
 [plikiem w formacie JSON z historią oglądania](https://www.youtube.com/watch?v=zlzzO1e6dws)
 
 """
-
-@st.cache
 def data_preprocessing(file):
     df = pd.read_json(file)
     df = df.drop(['products','activityControls','description','details'], axis = 1)
