@@ -1,6 +1,7 @@
 import pandas as pd
 import streamlit as st
 import datetime
+import matplotlib.pyplot as plt
 
 pd.options.mode.chained_assignment = None
 st.title('LSowa analiza')
@@ -81,7 +82,7 @@ if file is not None:
             st.write(df['day_of_week'].value_counts())
         if hour:
             st.write('Liczba wyświetleń wideo w danej godzinie')
-            st.write(df['hour'].value_counts())
+            st.bar_chart(df['hour'].value_counts())
 
         if month:
             st.write('Liczba wyświetleń wideo w danym rodzaju miesiąca')
