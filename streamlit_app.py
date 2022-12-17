@@ -72,28 +72,25 @@ if file is not None:
         
         if year:
             st.write('Liczba wyświetleń wideo w danym roku')
-            st.write(df['year'].value_counts())
+            st.bar_chart(df['year'].value_counts())
 
         if year_month:
             st.write('Liczba wyświetleń wideo w danym miesiącu')
             st.write(df['year_month'].value_counts())
         if day:
             st.write('Liczba wyświetleń wideo w danym dniu tygodnia (poniedziałek = 0)')
-            st.write(df['day_of_week'].value_counts())
+            st.bar_chart(df['day_of_week'].value_counts())
         if hour:
             st.write('Liczba wyświetleń wideo w danej godzinie')
             st.bar_chart(df['hour'].value_counts())
 
         if month:
             st.write('Liczba wyświetleń wideo w danym rodzaju miesiąca')
-            st.write(df['month'].value_counts())
+            st.bar_chart(df['month'].value_counts())
         
     else:
         pass
 
-"""
-###### PS. Może dałbym opcję rysowania z tego wykresów gdybyście nie postanowili ich opluć na odcinku 
-"""
 
 
 
