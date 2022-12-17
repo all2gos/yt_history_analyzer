@@ -83,8 +83,8 @@ if file is not None:
             st.write(df['day_of_week'].value_counts())
         if hour:
             st.write('Liczba wyświetleń wideo w danej godzinie')
-            fig = plt.figure(figsize=(10, 4))
-            sns.countplot(x='hour', data=df)
+            fig, ax = plt.subplots()
+            sns.countplot(x='hour', data=df, ax=ax)
             st.pyplot(fig)
 
         if month:
