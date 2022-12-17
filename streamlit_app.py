@@ -54,8 +54,6 @@ compute = st.button('Compute')
 if file is not None:    
     if compute:        
         df = data_preprocessing(file) 
-        st.write(df.columns)
-        st.write(df.head(3))
 
         if channel == 'Wybierz kanał, którego statystyki oglądania chcesz wyświetlić, możesz zostawić to pole puste':
             if top_video:
@@ -76,7 +74,7 @@ if file is not None:
 
         if year_month:
             st.write('Liczba wyświetleń wideo w danym miesiącu')
-            st.write(df['year_month'].value_counts())
+            st.bar_chart(df['year_month'].value_counts())
         if day:
             st.write('Liczba wyświetleń wideo w danym dniu tygodnia (poniedziałek = 0)')
             st.bar_chart(df['day_of_week'].value_counts())
