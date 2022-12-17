@@ -44,7 +44,7 @@ def data_preprocessing(file):
 file = st.file_uploader("Tutaj wklej swoją historię")
 
 """
-## Przed włączeniem obliczeń ustaw wszystkie preferowane filrty a następnie naciśnij przycisk Compute
+#### Przed włączeniem obliczeń ustaw wszystkie preferowane filtry a następnie naciśnij przycisk Compute
 
 """
 channel = st.text_input('','Wybierz kanał, którego statystyki oglądania chcesz wyświetlić, zostawiając to pole puste wybierasz wszystkie kanały')
