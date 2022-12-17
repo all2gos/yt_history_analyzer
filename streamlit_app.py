@@ -44,7 +44,7 @@ def data_preprocessing(file):
 file = st.file_uploader("Tutaj wklej swoją historię")
 
 """
-#### Przed włączeniem obliczeń ustaw wszystkie preferowane filtry a następnie naciśnij przycisk Compute
+###### Przed włączeniem obliczeń ustaw wszystkie preferowane filtry a następnie naciśnij przycisk Compute
 
 """
 channel = st.text_input('','Wybierz kanał, którego statystyki oglądania chcesz wyświetlić, zostawiając to pole puste wybierasz wszystkie kanały')
@@ -99,7 +99,7 @@ if file is not None:
         pass
 
 """
-## PS. Może dałbym opcję rysowania z tego wykresów gdybyście nie postanowili ich opluć na odcinku 
+###### PS. Może dałbym opcję rysowania z tego wykresów gdybyście nie postanowili ich opluć na odcinku 
 """
 
 
