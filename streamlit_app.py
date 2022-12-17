@@ -62,15 +62,14 @@ if file is not None:
             st.write('Najczęściej oglądane kanały')
             st.write(df['subtitles'].value_counts())
         else:
-            st.write('Dane dla',channel)
             try:
                 df = df[df['subtitles']==channel]
+                st.write('Dane dla',channel)   
+                if top_video:
+                    st.write('Najczęściej oglądany film kanału',channel)
+                    st.write(df['wideo'].value_counts())        
             except:
                 st.write('Ups, widocznie wpisałxś nazwę kanału, która nie wystepuje w Twojej historii. Sprawdź spacje i literówki')
-            if top_video:
-                st.write('Najczęściej oglądany film kanału',channel)
-                st.write(df['wideo'].value_counts())
-        
         if year:
             st.write('Liczba wyświetleń wideo w danym roku')
             st.bar_chart(df['year'].value_counts())
@@ -88,7 +87,6 @@ if file is not None:
         if month:
             st.write('Liczba wyświetleń wideo w danym rodzaju miesiąca')
             st.bar_chart(df['month'].value_counts())
-        
     else:
         pass
 
