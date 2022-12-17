@@ -53,7 +53,7 @@ if file is not None:
     if compute:        
         df = data_preprocessing(file)
         st.write(df.columns)
-        if channel = 'Wybierz kanał, którego statystyki oglądania chcesz wyświetlić':
+        if channel == 'Wybierz kanał, którego statystyki oglądania chcesz wyświetlić':
             st.write('Najczęściej oglądane wideo')
             st.write(df['wideo'].value_counts())
             st.write('Najczęściej oglądane kanały')
