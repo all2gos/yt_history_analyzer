@@ -47,7 +47,9 @@ channel = st.text_input('','Wybierz kanał, którego statystyki oglądania chces
 begin = st.date_input('Wprowadź datę od której chcesz wyświetlać statystki')
 end = st.date_input('Wprowadź datę końcową do której chcesz wyświetlać statystyki')
 compute = st.button('Compute')
-
+top_video = st.checkbox('Zaznacz, jeśli chcesz zobaczyć najczęściej oglądane filmy')
+year = st.checkbox('Zaznacz, jeśli chcesz zobaczyć liczbę filmów w zależności od roku')
+month = st.checkbox('Zaznacz, jeśli chcesz zobaczyć liczbę filmów w zależności od miesiąca')
 
 if file is not None:     
     
@@ -57,7 +59,7 @@ if file is not None:
         st.write(df.head(3))
 
         if begin != 'Wprowadź datę od której chcesz wyświetlać statystki' and end != 'Wprowadź datę końcową do której chcesz wyświetlać statystyki':
-            df = df[(df['time']>begin) & (df['time']<end)]
+            pass #póki co
 
         if channel == 'Wybierz kanał, którego statystyki oglądania chcesz wyświetlić':
             st.write('Najczęściej oglądane wideo')
