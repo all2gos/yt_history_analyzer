@@ -43,7 +43,7 @@ def data_preprocessing(file):
 
 file = st.file_uploader("Tutaj wklej swoją historię")
 st.write('Przed włączeniem obliczeń ustaw wszystkie preferowane filrty a następnie naciśnij przycisk Compute')
-channel = st.text_input('','Wybierz kanał, którego statystyki oglądania chcesz wyświetlić')
+channel = st.text_input('','Wybierz kanał, którego statystyki oglądania chcesz wyświetlić, zostawiając to pole puste wybierasz wszystkie kanały')
 
 compute = st.button('Compute')
 top_video = st.checkbox('Zaznacz, jeśli chcesz zobaczyć najczęściej oglądane filmy')
@@ -62,27 +62,41 @@ if file is not None:
         st.write(df.head(3))
 
         if channel == 'Wybierz kanał, którego statystyki oglądania chcesz wyświetlić':
-            st.write('Najczęściej oglądane wideo')
-            st.write(df['wideo'].value_counts())
+            if top_video:
+                st.write('Najczęściej oglądane wideo')
+                st.write(df['wideo'].value_counts())
             st.write('Najczęściej oglądane kanały')
             st.write(df['subtitles'].value_counts())
         else:
             st.write('Dane dla',channel)
             df = df[df['subtitles']==channel]
-            st.write('Najczęściej oglądany film kanału',channel)
-            st.write(df['wideo'].value_counts())
+            if top_video:
+                st.write('Najczęściej oglądany film kanału',channel)
+                st.write(df['wideo'].value_counts())
         
         if year:
+            st.write('Liczba wyświetleń wideo w danym roku')
             st.write(df['year'].value_counts())
+
         if year_month:
+            st.write('Liczba wyświetleń wideo w danym miesiącu')
             st.write(df['year_month'].value_counts())
         if day:
+            st.write('Liczba wyświetleń wideo w danym dniu tygodnia')
             st.write(df['day_of_week'].value_counts())
+        if hour:
+            st.write('Liczba wyświetleń wideo w danej godzinie')
+            st.write(df['hour'].value_counts())
+        if month:
+            st.write('Liczba wyświetleń wideo w danym rodzaju miesiąca')
+            st.write(df['month'].value_counts())
         
     else:
         pass
 
-
+"""
+##PS. Może dałbym opcję rysowania z tego wykresów gdybyście nie postanowili ich opluć na odcinku 
+"""
 
 
 
