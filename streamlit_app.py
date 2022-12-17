@@ -8,7 +8,7 @@ st.title('LSowa analiza')
 """
 ## Dzieeeeeeeeeń dobry
 
-Stworzyłem tą aplikację po to, aby odpowiedzieć na pytania, których nigdy nawet nie zadaliście.
+Stworzyłem tę aplikację po to, aby odpowiedzieć na pytania, których nigdy nawet nie zadaliście.
 
 Aby poddać analizie waszą historię YT musicie dysponować 
 [plikiem w formacie JSON z historią oglądania](https://www.youtube.com/watch?v=zlzzO1e6dws)
@@ -41,26 +41,30 @@ def data_preprocessing(file):
     return df
 
 file = st.file_uploader("Tutaj wklej swoją historię")
-compute = st.button('Compute')
+st.write('Przed włączeniem obliczeń ustaw wszystkie preferowane filrty a następnie naciśnij przycisk Compute')
 channel = st.text_input('','Wybierz kanał, którego statystyki oglądania chcesz wyświetlić')
+begin = st.date_input('Wprowadź datę od której chcesz wyświetlać statystki')
+end = st.date_input('Wprowadź datę końcową do której chcesz wyświetlać statystyki')
+compute = st.button('Compute')
+
 
 if file is not None:     
     
-    if compute:
+    if compute:        
         df = data_preprocessing(file)
-        
-        st.write('Najczęściej oglądane wideo')
-        st.write(df['wideo'].value_counts())
-        st.write('Najczęściej oglądane kanały')
-        st.write(df['subtitles'].value_counts())
-
-        st.write('Dane dla LSa')
-        df = df[df['subtitles']==channel]
-        st.write('Najczęściej oglądany LS')
-        st.write(df['wideo'].value_counts())
+        st.write(df.columns)
+        if channel = 'Wybierz kanał, którego statystyki oglądania chcesz wyświetlić':
+            st.write('Najczęściej oglądane wideo')
+            st.write(df['wideo'].value_counts())
+            st.write('Najczęściej oglądane kanały')
+            st.write(df['subtitles'].value_counts())
+        else:
+            st.write('Dane dla',channel)
+            df = df[df['subtitles']==channel]
+            st.write('Najczęściej oglądany film kanału',channel)
+            st.write(df['wideo'].value_counts())
     else:
-        st.write('Przed włączeniem obliczeń ustaw wszystkie preferowane filrty a następnie naciśnij przycisk Compute')
-
+        pass
 
 
 
