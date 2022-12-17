@@ -44,12 +44,15 @@ def data_preprocessing(file):
 file = st.file_uploader("Tutaj wklej swoją historię")
 st.write('Przed włączeniem obliczeń ustaw wszystkie preferowane filrty a następnie naciśnij przycisk Compute')
 channel = st.text_input('','Wybierz kanał, którego statystyki oglądania chcesz wyświetlić')
-begin = st.date_input('Wprowadź datę od której chcesz wyświetlać statystki')
-end = st.date_input('Wprowadź datę końcową do której chcesz wyświetlać statystyki')
+
 compute = st.button('Compute')
 top_video = st.checkbox('Zaznacz, jeśli chcesz zobaczyć najczęściej oglądane filmy')
+
 year = st.checkbox('Zaznacz, jeśli chcesz zobaczyć liczbę filmów w zależności od roku')
-month = st.checkbox('Zaznacz, jeśli chcesz zobaczyć liczbę filmów w zależności od miesiąca')
+year_month = st.checkbox('Zaznacz, jeśli chcesz zobaczyć liczbę filmów w zależności od miesiąca')
+day = st.checkbox('Zaznacz, jeśli chcesz zobaczyć liczbę filmów w zależności od rodzaju dnia tygodni (np. poniedziałki)')
+hour = st.checkbox('Jak wyżej tylko godziny')
+month = st.checkbox('Jak wyżej tylko miesiące')
 
 if file is not None:     
     
@@ -57,9 +60,6 @@ if file is not None:
         df = data_preprocessing(file)        
         st.write(df.columns)
         st.write(df.head(3))
-
-        if begin != 'Wprowadź datę od której chcesz wyświetlać statystki' and end != 'Wprowadź datę końcową do której chcesz wyświetlać statystyki':
-            pass #póki co
 
         if channel == 'Wybierz kanał, którego statystyki oglądania chcesz wyświetlić':
             st.write('Najczęściej oglądane wideo')
@@ -71,6 +71,14 @@ if file is not None:
             df = df[df['subtitles']==channel]
             st.write('Najczęściej oglądany film kanału',channel)
             st.write(df['wideo'].value_counts())
+        
+        if year:
+            st.write(df['year'].value_counts())
+        if year_month:
+            st.write(df['year_month'].value_counts())
+        if day:
+            st.write(df['day_of_week'].value_counts())
+        
     else:
         pass
 
