@@ -12,7 +12,7 @@ st.title('LSowa analiza')
 Stworzyłem tę aplikację po to, aby odpowiedzieć na pytania, których nigdy nawet nie zadaliście.
 
 Aby poddać analizie waszą historię YT musicie dysponować 
-[plikiem w formacie JSON z historią oglądania](https://www.youtube.com/watch?v=zlzzO1e6dws)
+[plikiem w formacie JSON z historią oglądania](https://webapps.stackexchange.com/questions/101263/how-can-i-export-youtubes-personal-history)
 
 """
 def data_preprocessing(file):
@@ -63,7 +63,10 @@ if file is not None:
             st.write(df['subtitles'].value_counts())
         else:
             st.write('Dane dla',channel)
-            df = df[df['subtitles']==channel]
+            try:
+                df = df[df['subtitles']==channel]
+            except:
+                st.write('Ups, widocznie wpisałxś nazwę kanału, która nie wystepuje w Twojej historii. Sprawdź spacje i literówki')
             if top_video:
                 st.write('Najczęściej oglądany film kanału',channel)
                 st.write(df['wideo'].value_counts())
