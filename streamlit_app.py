@@ -42,14 +42,7 @@ def data_preprocessing(file):
     return df
 
 file = st.file_uploader("Tutaj wklej swoją historię")
-
-"""
-###### Przed włączeniem obliczeń ustaw wszystkie preferowane filtry a następnie naciśnij przycisk Compute
-
-"""
 channel = st.text_input('','Wybierz kanał, którego statystyki oglądania chcesz wyświetlić, możesz zostawić to pole puste')
-
-compute = st.button('Compute')
 top_video = st.checkbox('Zaznacz, jeśli chcesz zobaczyć najczęściej oglądane filmy')
 
 year = st.checkbox('Zaznacz, jeśli chcesz zobaczyć liczbę filmów w zależności od roku')
@@ -57,15 +50,17 @@ year_month = st.checkbox('Zaznacz, jeśli chcesz zobaczyć liczbę filmów w zal
 day = st.checkbox('Zaznacz, jeśli chcesz zobaczyć liczbę filmów w zależności od rodzaju dnia tygodni (np. poniedziałki)')
 hour = st.checkbox('Jak wyżej tylko godziny')
 month = st.checkbox('Jak wyżej tylko miesiące')
+compute = st.button('Compute')
 
 if file is not None:     
-    
+    init = data_preprocessing(file) 
+
     if compute:        
-        df = data_preprocessing(file)        
+        df = init  
         st.write(df.columns)
         st.write(df.head(3))
 
-        if channel == 'Wybierz kanał, którego statystyki oglądania chcesz wyświetlić':
+        if channel == 'Wybierz kanał, którego statystyki oglądania chcesz wyświetlić, możesz zostawić to pole puste':
             if top_video:
                 st.write('Najczęściej oglądane wideo')
                 st.write(df['wideo'].value_counts())
@@ -86,7 +81,7 @@ if file is not None:
             st.write('Liczba wyświetleń wideo w danym miesiącu')
             st.write(df['year_month'].value_counts())
         if day:
-            st.write('Liczba wyświetleń wideo w danym dniu tygodnia')
+            st.write('Liczba wyświetleń wideo w danym dniu tygodnia (poniedziałek = 0)')
             st.write(df['day_of_week'].value_counts())
         if hour:
             st.write('Liczba wyświetleń wideo w danej godzinie')
