@@ -51,9 +51,13 @@ compute = st.button('Compute')
 if file is not None:     
     
     if compute:        
-        df = data_preprocessing(file)
+        df = data_preprocessing(file)        
         st.write(df.columns)
         st.write(df.head(3))
+
+        if begin != 'Wprowadź datę od której chcesz wyświetlać statystki' and end != 'Wprowadź datę końcową do której chcesz wyświetlać statystyki':
+            df = df[(df['time']>begin) & (df['time']<end)]
+            
         if channel == 'Wybierz kanał, którego statystyki oglądania chcesz wyświetlić':
             st.write('Najczęściej oglądane wideo')
             st.write(df['wideo'].value_counts())
