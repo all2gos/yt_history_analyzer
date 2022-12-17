@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
 import datetime
-import matplotlib.pyplot as plt
+
 
 pd.options.mode.chained_assignment = None
 st.title('LSowa analiza')
