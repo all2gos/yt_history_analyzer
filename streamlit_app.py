@@ -42,6 +42,7 @@ def data_preprocessing(file):
 
 file = st.file_uploader("Tutaj wklej swoją historię")
 compute = st.button('Compute')
+channel = st.text_input('','Wybierz kanał, którego statystyki oglądania chcesz wyświetlić')
 
 if file is not None:     
     
@@ -54,12 +55,12 @@ if file is not None:
         st.write(df['subtitles'].value_counts())
 
         st.write('Dane dla LSa')
-        df = df[df['subtitles']=='Lekko Stronniczy']
+        df = df[df['subtitles']==channel]
         st.write('Najczęściej oglądany LS')
         st.write(df['wideo'].value_counts())
     else:
         st.write('Przed włączeniem obliczeń ustaw wszystkie preferowane filrty a następnie naciśnij przycisk Compute')
-    
+
 
 
 
