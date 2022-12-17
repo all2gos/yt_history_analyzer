@@ -12,11 +12,12 @@ Stworzyłem tą aplikację po to, aby odpowiedzieć na pytania, których nigdy n
 
 Aby poddać analizie waszą historię YT musicie dysponować 
 [plikiem w formacie JSON z historią oglądania](https://www.youtube.com/watch?v=zlzzO1e6dws)
+
 """
-df = pd.DataFrame()
-file = st.file_uploader("Tutaj wklej swoją historię")
-if file is not None:
-    df = pd.read_json(file)     
+
+
+def data_preprocessing(file):
+    df = pd.read_json(file)
     df = df.drop(['products','activityControls','description','details'], axis = 1)
     len_1 = len(df)
     df = df.dropna()
@@ -37,12 +38,17 @@ if file is not None:
         df['year_month'].iloc[item] = df['time'].iloc[item][:7]
         df['time'].iloc[item] = df['time'].iloc[item][:10]
         df['wideo'].iloc[item] = df['title'].iloc[item][10:]        
+    return df
+
+file = st.file_uploader("Tutaj wklej swoją historię")
+if file is not None:     
+    
+    df = data_preprocessing(file)
        
     st.write('Najczęściej oglądane wideo')
     st.write(df['wideo'].value_counts())
     st.write('Najczęściej oglądane kanały')
     st.write(df['subtitles'].value_counts())
-
 
     st.write('Dane dla LSa')
     df = df[df['subtitles']=='Lekko Stronniczy']
