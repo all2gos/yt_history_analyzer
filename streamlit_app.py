@@ -15,7 +15,7 @@ Aby poddać analizie waszą historię YT musicie dysponować
 
 """
 
-
+@st.cache
 def data_preprocessing(file):
     df = pd.read_json(file)
     df = df.drop(['products','activityControls','description','details'], axis = 1)
@@ -52,7 +52,8 @@ hour = st.checkbox('Jak wyżej tylko godziny')
 month = st.checkbox('Jak wyżej tylko miesiące')
 compute = st.button('Compute')
 
-if file is not None:     
+if file is not None:    
+     
     init = data_preprocessing(file) 
 
     if compute:        
