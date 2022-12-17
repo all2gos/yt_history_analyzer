@@ -41,19 +41,24 @@ def data_preprocessing(file):
     return df
 
 file = st.file_uploader("Tutaj wklej swoją historię")
+compute = st.button('Compute')
+
 if file is not None:     
     
-    df = data_preprocessing(file)
-       
-    st.write('Najczęściej oglądane wideo')
-    st.write(df['wideo'].value_counts())
-    st.write('Najczęściej oglądane kanały')
-    st.write(df['subtitles'].value_counts())
+    if compute:
+        df = data_preprocessing(file)
+        
+        st.write('Najczęściej oglądane wideo')
+        st.write(df['wideo'].value_counts())
+        st.write('Najczęściej oglądane kanały')
+        st.write(df['subtitles'].value_counts())
 
-    st.write('Dane dla LSa')
-    df = df[df['subtitles']=='Lekko Stronniczy']
-    st.write('Najczęściej oglądany LS')
-    st.write(df['wideo'].value_counts())
+        st.write('Dane dla LSa')
+        df = df[df['subtitles']=='Lekko Stronniczy']
+        st.write('Najczęściej oglądany LS')
+        st.write(df['wideo'].value_counts())
+    else:
+        st.write('Przed włączeniem obliczeń ustaw wszystkie preferowane filrty a następnie naciśnij przycisk Compute')
     
 
 
