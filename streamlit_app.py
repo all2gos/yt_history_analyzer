@@ -38,7 +38,7 @@ def data_preprocessing(file):
         df['year_month'].iloc[item] = df['time'].iloc[item][:7]
         df['time'].iloc[item] = df['time'].iloc[item][:10]
         df['wideo'].iloc[item] = df['title'].iloc[item][10:]   
-        df['time'].iloc[item] = datetime.datetime(df['time'].iloc[item][:4],df['time'].iloc[item][5:7],df['time'].iloc[item][8:])     
+        df['time'].iloc[item] = datetime.datetime(int(df['time'].iloc[item][:4]),int(df['time'].iloc[item][5:7]),int(df['time'].iloc[item][8:]))     
     return df
 
 file = st.file_uploader("Tutaj wklej swoją historię")
