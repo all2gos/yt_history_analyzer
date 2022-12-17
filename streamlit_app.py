@@ -1,6 +1,8 @@
 import pandas as pd
 import streamlit as st
 import datetime
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 pd.options.mode.chained_assignment = None
 st.title('LSowa analiza')
@@ -51,11 +53,8 @@ month = st.checkbox('Jak wyżej tylko miesiące')
 compute = st.button('Compute')
 
 if file is not None:    
-     
-    init = data_preprocessing(file) 
-
     if compute:        
-        df = init  
+        df = data_preprocessing(file) 
         st.write(df.columns)
         st.write(df.head(3))
 
@@ -84,7 +83,10 @@ if file is not None:
             st.write(df['day_of_week'].value_counts())
         if hour:
             st.write('Liczba wyświetleń wideo w danej godzinie')
-            st.write(df['hour'].value_counts())
+            fig = plt.figure(figsize=(10, 4))
+            sns.countplot(x='hour', data=df)
+            st.pyplot(fig)
+
         if month:
             st.write('Liczba wyświetleń wideo w danym rodzaju miesiąca')
             st.write(df['month'].value_counts())
