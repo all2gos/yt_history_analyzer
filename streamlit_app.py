@@ -38,38 +38,41 @@ def data_preprocessing(file):
         df['time'].iloc[item] = df['time'].iloc[item][:10]
         df['wideo'].iloc[item] = df['title'].iloc[item][10:]   
         df['time'].iloc[item] = datetime.datetime(int(df['time'].iloc[item][:4]),int(df['time'].iloc[item][5:7]),int(df['time'].iloc[item][8:]))     
-    return df
+    return df, len_1
 
 file = st.file_uploader("Tutaj wklej swoją historię")
-channel = st.text_input('','Wybierz kanał, którego statystyki oglądania chcesz wyświetlić, możesz zostawić to pole puste')
-top_video = st.checkbox('Zaznacz, jeśli chcesz zobaczyć najczęściej oglądane filmy')
+channel = st.text_input('','Wybierz kanał, którego statystyki oglądania chcesz wyświetlić, nie wpisując nic wybierasz wszystkie')
+st.write('Wybierz co dokładnie chcesz zobaczyć')
 
-year = st.checkbox('Zaznacz, jeśli chcesz zobaczyć liczbę filmów w zależności od roku')
-year_month = st.checkbox('Zaznacz, jeśli chcesz zobaczyć liczbę filmów w zależności od miesiąca')
-day = st.checkbox('Zaznacz, jeśli chcesz zobaczyć liczbę filmów w zależności od rodzaju dnia tygodni (np. poniedziałki)')
-hour = st.checkbox('Jak wyżej tylko godziny')
-month = st.checkbox('Jak wyżej tylko miesiące')
+top_video = st.checkbox('Najczęściej oglądane filmy')
+year = st.checkbox('Liczbę filmów w zależności od roku')
+year_month = st.checkbox('Liczbę filmów w zależności od miesiąca')
+month = st.checkbox('Liczbę filmów w zależności od rodzaju miesiąca (np. wszystkie stycznie)')
+day = st.checkbox('Liczbę filmów w zależności od rodzaju dnia tygodni (np. poniedziałki)')
+hour = st.checkbox('Liczbę filmów w zależności od godziny')
+st.write('Dopiero po wybraniu wszystkich interesujących Cię opcji naciśnij "Compute"')
 compute = st.button('Compute')
 
 if file is not None:    
     if compute:        
-        df = data_preprocessing(file) 
+        fun = data_preprocessing(file)
+        df = fun[0]
 
-        if channel == 'Wybierz kanał, którego statystyki oglądania chcesz wyświetlić, możesz zostawić to pole puste' or channel == '':
-            if top_video:
-                st.write('Najczęściej oglądane wideo')
-                st.write(df['wideo'].value_counts())
-            st.write('Najczęściej oglądane kanały')
-            st.write(df['subtitles'].value_counts())
-        else:
+        st.write('Od', df['time'].iloc[0], 'zobaczyłeś',fun[1], 'filmów')
+        st.write('Najczęściej oglądane kanały')
+        st.write(df['subtitles'].value_counts())
+
+        if channel != 'Wybierz kanał, którego statystyki oglądania chcesz wyświetlić, możesz zostawić to pole puste' or channel == '':
             try:
                 df = df[df['subtitles']==channel]
-                st.write('Dane dla',channel)   
-                if top_video:
-                    st.write('Najczęściej oglądany film kanału',channel)
-                    st.write(df['wideo'].value_counts())        
+                st.write('Dane dla',channel)  
+       
             except:
                 st.write('Ups, widocznie wpisałxś nazwę kanału, która nie wystepuje w Twojej historii. Sprawdź spacje i literówki')
+        
+        if top_video:
+                st.write('Najczęściej oglądane wideo')
+                st.write(df['wideo'].value_counts())
         if year:
             st.write('Liczba wyświetleń wideo w danym roku')
             st.bar_chart(df['year'].value_counts())
@@ -77,19 +80,14 @@ if file is not None:
         if year_month:
             st.write('Liczba wyświetleń wideo w danym miesiącu')
             st.bar_chart(df['year_month'].value_counts())
+
+        if month:
+            st.write('Liczba wyświetleń wideo w danym rodzaju miesiąca')
+            st.bar_chart(df['month'].value_counts())
+
         if day:
             st.write('Liczba wyświetleń wideo w danym dniu tygodnia (poniedziałek = 0)')
             st.bar_chart(df['day_of_week'].value_counts())
         if hour:
             st.write('Liczba wyświetleń wideo w danej godzinie')
             st.bar_chart(df['hour'].value_counts())
-
-        if month:
-            st.write('Liczba wyświetleń wideo w danym rodzaju miesiąca')
-            st.bar_chart(df['month'].value_counts())
-    else:
-        pass
-
-
-
-
