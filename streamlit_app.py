@@ -60,16 +60,13 @@ if file is not None:
         fun = data_preprocessing(file)
         df = fun[0]
 
-        st.write('Od', df['time'].iloc[0], 'zobaczyłeś',fun[1], 'filmów')
+        st.write('Od', df['time'].iloc[0][:11], 'zobaczyłxś',fun[1], 'filmów')
         st.write('Najczęściej oglądane kanały')
         st.write(df['subtitles'].value_counts())
 
-        if channel != 'Wybierz kanał, którego statystyki oglądania chcesz wyświetlić, nie wpisując nic wybierasz wszystkie' or channel == '':
-            try:
-                df = df[df['subtitles']==channel]       
-            except:
-                st.write('Ups, widocznie wpisałxś nazwę kanału, która nie wystepuje w Twojej historii. Sprawdź spacje i literówki')
-        
+        if channel in df['subtitles'].unique():            
+                df = df[df['subtitles']==channel]     
+
         if top_video:
                 st.write('Najczęściej oglądane wideo')
                 st.write(df['wideo'].value_counts())
