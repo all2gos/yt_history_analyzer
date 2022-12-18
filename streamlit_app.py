@@ -42,14 +42,16 @@ def data_preprocessing(file):
 
 file = st.file_uploader("Tutaj wklej swoją historię")
 channel = st.text_input('','Wybierz kanał, którego statystyki oglądania chcesz wyświetlić, nie wpisując nic wybierasz wszystkie')
-st.write('Wybierz co dokładnie chcesz zobaczyć')
+st.write('Wybierz jakie statystyki chcesz zobaczyć')
 
 top_video = st.checkbox('Najczęściej oglądane filmy')
-year = st.checkbox('Liczbę filmów w zależności od roku')
-year_month = st.checkbox('Liczbę filmów w zależności od miesiąca')
-month = st.checkbox('Liczbę filmów w zależności od rodzaju miesiąca (np. wszystkie stycznie)')
-day = st.checkbox('Liczbę filmów w zależności od rodzaju dnia tygodni (np. poniedziałki)')
-hour = st.checkbox('Liczbę filmów w zależności od godziny')
+
+st.write('Liczbę filmów w zależności od:')
+year = st.checkbox('roku')
+year_month = st.checkbox('miesiąca')
+month = st.checkbox('rodzaju miesiąca (np. wszystkie stycznie)')
+day = st.checkbox('rodzaju dnia tygodni (np. poniedziałki)')
+hour = st.checkbox('godziny')
 st.write('Dopiero po wybraniu wszystkich interesujących Cię opcji naciśnij "Compute"')
 compute = st.button('Compute')
 
@@ -62,11 +64,9 @@ if file is not None:
         st.write('Najczęściej oglądane kanały')
         st.write(df['subtitles'].value_counts())
 
-        if channel != 'Wybierz kanał, którego statystyki oglądania chcesz wyświetlić, możesz zostawić to pole puste' or channel == '':
+        if channel != 'Wybierz kanał, którego statystyki oglądania chcesz wyświetlić, nie wpisując nic wybierasz wszystkie' or channel == '':
             try:
-                df = df[df['subtitles']==channel]
-                st.write('Dane dla',channel)  
-       
+                df = df[df['subtitles']==channel]       
             except:
                 st.write('Ups, widocznie wpisałxś nazwę kanału, która nie wystepuje w Twojej historii. Sprawdź spacje i literówki')
         
