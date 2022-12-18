@@ -41,8 +41,8 @@ def data_preprocessing(file):
     return df, len_1
 
 file = st.file_uploader("Tutaj wklej swoją historię")
-st.write('Jeżeli wpiszesz kanał, który nie występuje w Twojej historii wówczas statystyki dalej będą wyświetalne dla wszystkich kanałów')
 channel = st.text_input('','Wybierz kanał, którego statystyki oglądania chcesz wyświetlić, nie wpisując nic wybierasz wszystkie')
+st.write('Jeżeli wpiszesz kanał, który nie występuje w Twojej historii wówczas statystyki dalej będą wyświetalne dla wszystkich kanałów')
 st.write('Wybierz jakie statystyki chcesz zobaczyć')
 
 top_video = st.checkbox('Najczęściej oglądane filmy')
