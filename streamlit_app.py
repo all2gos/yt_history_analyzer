@@ -41,17 +41,18 @@ def data_preprocessing(file):
     return df, len_1
 
 file = st.file_uploader("Tutaj wklej swoją historię")
+st.write('Jeżeli wpiszesz kanał, który nie występuje w Twojej historii wówczas statystyki dalej będą wyświetalne dla wszystkich kanałów')
 channel = st.text_input('','Wybierz kanał, którego statystyki oglądania chcesz wyświetlić, nie wpisując nic wybierasz wszystkie')
 st.write('Wybierz jakie statystyki chcesz zobaczyć')
 
 top_video = st.checkbox('Najczęściej oglądane filmy')
 
-st.write('Liczbę filmów w zależności od:')
+st.write('Liczbę filmów zobaczonych w danym:')
 year = st.checkbox('roku')
-year_month = st.checkbox('miesiąca')
+year_month = st.checkbox('miesiącu')
 month = st.checkbox('rodzaju miesiąca (np. wszystkie stycznie)')
 day = st.checkbox('rodzaju dnia tygodni (np. poniedziałki)')
-hour = st.checkbox('godziny')
+hour = st.checkbox('godzinie')
 st.write('Dopiero po wybraniu wszystkich interesujących Cię opcji naciśnij "Compute"')
 compute = st.button('Compute')
 
