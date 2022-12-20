@@ -48,7 +48,7 @@ st.write('Wybierz jakie statystyki chcesz zobaczyć')
 top_video = st.checkbox('Najczęściej oglądane filmy')
 
 st.write('Liczbę filmów zobaczonych w danym:')
-st.write(datetime.date.today())
+st.write(datetime.date.today()-datetime.date(2016,2,12))
 year = st.checkbox('roku')
 year_month = st.checkbox('miesiącu')
 month = st.checkbox('rodzaju miesiąca (np. wszystkie stycznie)')
