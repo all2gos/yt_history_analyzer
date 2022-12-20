@@ -61,7 +61,7 @@ if file is not None:
         fun = data_preprocessing(file)
         df = fun[0]
         st.write(df.head())
-        st.write('Od', df['time'].iloc[0], 'zobaczyłxś',fun[1], 'filmów, co daje ')
+        st.write('Od', df['time'].iloc[0], 'zobaczyłxś',fun[1], 'filmów, co daje ', int(fun[1]/(datetime.date.today()-df['time'].iloc[0])), 'zobaczonych filmów dziennie')
         st.write('Najczęściej oglądane kanały')
         st.write(df['subtitles'].value_counts())
 
