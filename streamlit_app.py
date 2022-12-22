@@ -27,9 +27,7 @@ def data_preprocessing(file):
     df['month'] = pd.DatetimeIndex(df['time']).month
     df['year_month'] = df['time']
     df['wideo'] = df['time']    
-
-
-
+    st.write('Konwertowanie pliku JSON trwa. Proszę o cierpliwość ten proces może trwać 2-3 minuty')   
     list_of_nan = []
     for item in range(len(df)):
         try:
@@ -42,7 +40,6 @@ def data_preprocessing(file):
         df['wideo'].iloc[item] = df['title'].iloc[item][10:]   
         df['time'].iloc[item] = datetime.date(int(df['time'].iloc[item][:4]),int(df['time'].iloc[item][5:7]),int(df['time'].iloc[item][8:])) 
     st.write('W wyniku usuwania uszkodzonych informacji,', len(list_of_nan), 'pozycji z historii zostało usuniętych')
-    st.write('Konwertowanie pliku JSON trwa. Proszę o cierpliwość ten proces może trwać 2-3 minuty')    
     return df, len(list_of_nan)
 
 file = st.file_uploader("Tutaj wklej swoją historię")
@@ -65,7 +62,7 @@ if file is not None:
     if compute:        
         fun = data_preprocessing(file)
         df = fun[0]
-        days_counter = datetime.date.today()
+        days_counter = datetime.date.today() - df['time'].iloc[-1]
         st.write('Od', df['time'].iloc[-1], 'zobaczyłxś',fun[1], 'filmów, co daje ', int(fun[1]/(days_counter.days)), 'zobaczonych filmów dziennie')
         st.write('Najczęściej oglądane kanały')
         st.write(df['subtitles'].value_counts())
