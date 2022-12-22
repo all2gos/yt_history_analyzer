@@ -40,7 +40,7 @@ def data_preprocessing(file):
         df['wideo'].iloc[item] = df['title'].iloc[item][10:]   
         df['time'].iloc[item] = datetime.date(int(df['time'].iloc[item][:4]),int(df['time'].iloc[item][5:7]),int(df['time'].iloc[item][8:])) 
     st.write('W wyniku usuwania uszkodzonych informacji,', len(list_of_nan), 'pozycji z historii zostało usuniętych')
-    return df, len(list_of_nan)
+    return df, len(df)
 
 file = st.file_uploader("Tutaj wklej swoją historię")
 channel = st.text_input('','Wybierz kanał, którego statystyki oglądania chcesz wyświetlić, nie wpisując nic wybierasz wszystkie')
