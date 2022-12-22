@@ -1,6 +1,7 @@
 import pandas as pd
 import streamlit as st
 import datetime
+import numpy as np
 
 
 pd.options.mode.chained_assignment = None
@@ -19,7 +20,10 @@ def data_preprocessing(file):
     df = pd.read_json(file)
     #df = df.drop(['products','activityControls','description','details'], axis = 1)
     len_1 = len(df)
-    df = df['subtitles'].dropna()
+    for i in range(len(df)):
+        if df['subtitles'].iloc[i] == np.nan:
+            df = df.drop([i])
+    
     len_2 = len(df)
     df['hour'] = df['time']
     df['day_of_week'] = pd.DatetimeIndex(df['time']).day_of_week
