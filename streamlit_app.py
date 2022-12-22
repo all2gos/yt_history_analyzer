@@ -21,8 +21,10 @@ def data_preprocessing(file):
     #df = df.drop(['products','activityControls','description','details'], axis = 1)
     len_1 = len(df)
     for i in range(len(df)):
+        counter = i
         if df['subtitles'].iloc[i] == np.nan:
             df = df.drop([i])
+            counter -= 1
     
     len_2 = len(df)
     df['hour'] = df['time']
