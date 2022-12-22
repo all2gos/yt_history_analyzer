@@ -17,7 +17,7 @@ Aby poddać analizie waszą historię YT musicie dysponować
 """
 def data_preprocessing(file):
     df = pd.read_json(file)
-    df = df.drop(['products','activityControls','description','details'], axis = 1)
+    #df = df.drop(['products','activityControls','description','details'], axis = 1)
     len_1 = len(df)
     df = df.dropna()
     len_2 = len(df)
