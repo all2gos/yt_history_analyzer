@@ -19,7 +19,7 @@ def data_preprocessing(file):
     df = pd.read_json(file)
     #df = df.drop(['products','activityControls','description','details'], axis = 1)
     len_1 = len(df)
-    df = df.dropna()
+    #df = df['subtitles'].dropna()
     len_2 = len(df)
     df['hour'] = df['time']
     df['day_of_week'] = pd.DatetimeIndex(df['time']).day_of_week
