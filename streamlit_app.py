@@ -60,8 +60,8 @@ if file is not None:
     if compute:        
         fun = data_preprocessing(file)
         df = fun[0]
-        days_counter = datetime.date.today()-df['time'].iloc[len(df)-1]
-        st.write('Od', df['time'].iloc[len(df)-1], 'zobaczyłxś',fun[1], 'filmów, co daje ', int(fun[1]/(days_counter.days)), 'zobaczonych filmów dziennie')
+        days_counter = datetime.date.today()-df['time'].iloc[-1]
+        st.write('Od', df['time'].iloc[-1], 'zobaczyłxś',fun[1], 'filmów, co daje ', int(fun[1]/(days_counter.days)), 'zobaczonych filmów dziennie')
         st.write('Najczęściej oglądane kanały')
         st.write(df['subtitles'].value_counts())
 
