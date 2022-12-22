@@ -19,14 +19,8 @@ Aby poddać analizie waszą historię YT musicie dysponować
 def data_preprocessing(file):
     df = pd.read_json(file)
     #df = df.drop(['products','activityControls','description','details'], axis = 1)
-    len_1 = len(df)
-    for i in range(len(df)):
-        counter = i
-        if df['subtitles'].iloc[i] == np.nan:
-            df = df.drop([i])
-            counter -= 1
+     
     
-    len_2 = len(df)
     df['hour'] = df['time']
     df['day_of_week'] = pd.DatetimeIndex(df['time']).day_of_week
     df['year'] = pd.DatetimeIndex(df['time']).year
@@ -34,17 +28,22 @@ def data_preprocessing(file):
     df['year_month'] = df['time']
     df['wideo'] = df['time']    
 
-    st.write('W wyniku usuwania uszkodzonych informacji,', len_1-len_2, 'pozycji z historii zostało usuniętych')
-    st.write('Konwertowanie pliku JSON trwa. Proszę o cierpliwość ten proces może trwać 2-3 minuty')
 
+
+    list_of_nan = []
     for item in range(len(df)):
-        df['subtitles'].iloc[item] = df['subtitles'].iloc[item][0]['name']
+        try:
+            df['subtitles'].iloc[item] = df['subtitles'].iloc[item][0]['name']
+        except:
+            list_of_nan.append(item)
         df['hour'].iloc[item] = df['time'].iloc[item][11:13]
         df['year_month'].iloc[item] = df['time'].iloc[item][:7]
         df['time'].iloc[item] = df['time'].iloc[item][:10]
         df['wideo'].iloc[item] = df['title'].iloc[item][10:]   
-        df['time'].iloc[item] = datetime.date(int(df['time'].iloc[item][:4]),int(df['time'].iloc[item][5:7]),int(df['time'].iloc[item][8:]))     
-    return df, len_1
+        df['time'].iloc[item] = datetime.date(int(df['time'].iloc[item][:4]),int(df['time'].iloc[item][5:7]),int(df['time'].iloc[item][8:])) 
+    st.write('W wyniku usuwania uszkodzonych informacji,', len(list_of_nan), 'pozycji z historii zostało usuniętych')
+    st.write('Konwertowanie pliku JSON trwa. Proszę o cierpliwość ten proces może trwać 2-3 minuty')    
+    return df, len(list_of_nan)
 
 file = st.file_uploader("Tutaj wklej swoją historię")
 channel = st.text_input('','Wybierz kanał, którego statystyki oglądania chcesz wyświetlić, nie wpisując nic wybierasz wszystkie')
