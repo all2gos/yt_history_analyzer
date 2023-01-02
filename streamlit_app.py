@@ -74,7 +74,7 @@ if file is not None:
         if top_video:
                 st.write('Najczęściej oglądane wideo')
 
-                st.write(df[df['wideo'] != 'film, który został usunięty'].value_counts())
+                st.write(df['wideo'].value_counts())
 
                 
         if year:
