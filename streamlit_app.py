@@ -27,6 +27,7 @@ def data_preprocessing(file):
     df['month'] = pd.DatetimeIndex(df['time']).month
     df['year_month'] = df['time']
     df['wideo'] = df['time']    
+    df['channel'] = df['subtitles']
     st.write('Konwertowanie pliku JSON trwa. Proszę o cierpliwość ten proces może trwać 2-3 minuty')   
     list_of_nan = []
     for item in range(len(df)):
@@ -65,10 +66,10 @@ if file is not None:
         days_counter = datetime.date.today() - df['time'].iloc[-1]
         st.write('Od', df['time'].iloc[-1], 'zobaczyłxś',fun[1], 'filmów, co daje ', int(fun[1]/(days_counter.days)), 'zobaczonych filmów dziennie')
         st.write('Najczęściej oglądane kanały')
-        st.write(df['subtitles'].value_counts())
+        st.write(df['channel'].value_counts())
 
-        if channel in df['subtitles'].unique():            
-                df = df[df['subtitles']==channel]     
+        if channel in df['channel'].unique():            
+                df = df[df['channel']==channel]     
 
         if top_video:
                 st.write('Najczęściej oglądane wideo')
