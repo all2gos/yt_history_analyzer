@@ -32,7 +32,7 @@ def data_preprocessing(file):
     list_of_nan = []
     for item in range(len(df)):
         try:
-            df['subtitles'].iloc[item] = df['subtitles'].iloc[item][0]['name']
+            df['channel'].iloc[item] = df['channel'].iloc[item][0]['name']
         except:
             list_of_nan.append(item)
         df['hour'].iloc[item] = df['time'].iloc[item][11:13]
