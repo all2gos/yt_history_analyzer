@@ -73,7 +73,7 @@ if file is not None:
 
         if top_video:
                 st.write('Najczęściej oglądane wideo')
-                st.write(df['wideo'].value_counts())
+                st.write(df['wideo'].value_counts()[1:])
         if year:
             st.write('Liczba wyświetleń wideo w danym roku')
             st.bar_chart(df['year'].value_counts())
