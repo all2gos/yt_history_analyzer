@@ -13,7 +13,7 @@ st.title('LSowa analiza')
 Stworzyłem tę aplikację po to, aby odpowiedzieć na pytania, których nigdy nawet nie zadaliście.
 
 Aby poddać analizie waszą historię YT musicie dysponować 
-[plikiem w formacie JSON z historią oglądania](https://webapps.stackexchange.com/questions/101263/how-can-i-export-youtubes-personal-history)
+[plikiem w formacie JSON z historią oglądania](https://youtu.be/OMc7w1DinPM?t=804)
 
 """
 def data_preprocessing(file):
