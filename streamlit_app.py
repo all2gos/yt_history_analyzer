@@ -5,7 +5,9 @@ import numpy as np
 
 
 pd.options.mode.chained_assignment = None
+st.set_page_config(page_title='yt_analyzer', page_icon=':mag:')
 st.title('LSowa analiza')
+
 
 """
 ## Dzieeeeeeeeeń dobry
@@ -16,11 +18,24 @@ Aby poddać analizie waszą historię YT musicie dysponować
 [plikiem w formacie JSON z historią oglądania](https://youtu.be/OMc7w1DinPM?t=804)
 
 """
+
+"""
+-----------------------------------------------------------------------------------------------
+#### Aktualizacja 4.01.2023
+###### Dodanie możliwości wyboru specyficznego okresu poddawanego analizie
+
+###### Plany:
+###### Dodanie możliwości wyboru kilku kanałów żeby porównywać ich statystyki między sobą
+
+###### Wszelkie bugi można zgłaszać korzystając z opcji z menu w prawym górnym rogu. Będe wzdzięczny za każdy feedback
+-------------------------------------------------------------------------------------------------
+"""
+
+"""
+#### Właściwy program
+"""
 def data_preprocessing(file):
-    df = pd.read_json(file)
-    #df = df.drop(['products','activityControls','description','details'], axis = 1)
-     
-    
+    df = pd.read_json(file)  
     df['hour'] = df['time']
     df['day_of_week'] = pd.DatetimeIndex(df['time']).day_of_week
     df['year'] = pd.DatetimeIndex(df['time']).year
@@ -28,7 +43,7 @@ def data_preprocessing(file):
     df['year_month'] = df['time']
     df['wideo'] = df['time']    
     df['channel'] = df['subtitles']
-    st.write('Konwertowanie pliku JSON trwa. Proszę o cierpliwość ten proces może trwać 2-3 minuty')   
+    st.write('Konwertowanie pliku JSON trwa. Proszę o cierpliwość ten proces może trwać nawet kilka minut')   
     list_of_nan = []
     for item in range(len(df)):
         try:
@@ -44,8 +59,17 @@ def data_preprocessing(file):
     return df, len(df)
 
 file = st.file_uploader("Tutaj wklej swoją historię")
-channel = st.text_input('','Wybierz kanał, którego statystyki oglądania chcesz wyświetlić, nie wpisując nic wybierasz wszystkie')
-st.write('Jeżeli wpiszesz kanał, który nie występuje w Twojej historii wówczas statystyki dalej będą wyświetalne dla wszystkich kanałów')
+channel_menu = st.checkbox('Zaznacz, jeśli chcesz sprawdzić statystyki dla konkretnego kanału')
+if channel_menu:    
+    channel = st.text_input('','Wpisz nazwe kanału (uwaga na literówki)').split(',')
+    st.write('Jeżeli wpiszesz kanał, który nie występuje w Twojej historii wówczas statystyki dalej będą wyświetalne dla wszystkich kanałów')
+
+data_choice = st.checkbox('Zaznacz jeśli chcesz sprawdzić statystyki dla specyficznego okresu')
+
+if data_choice:
+    begin = st.date_input('Data początkowa')
+    end = st.date_input('Data końcowa')
+
 st.write('Wybierz jakie statystyki chcesz zobaczyć')
 
 top_video = st.checkbox('Najczęściej oglądane filmy')
@@ -63,14 +87,42 @@ if file is not None:
     if compute:        
         fun = data_preprocessing(file)
         df = fun[0]
+        try:  
+            is_date_exist = begin
+            pre_data_df= fun[0]
+            df = []  
+            for i in range(len(pre_data_df)):
+                if pre_data_df['time'].iloc[i]>begin and pre_data_df['time'].iloc[i]<end:
+                    df.append(pre_data_df.iloc[i])
+            df = pd.DataFrame(data=df, columns = pre_data_df.columns)
+            st.write('Od', begin, 'do', end, 'zobaczyłxś',len(df), 'filmów, co daje ', int(len(df)/(end-begin).days), 'zobaczonych filmów dziennie')
+
+        except:
+            pass        
         days_counter = datetime.date.today() - df['time'].iloc[-1]
-        st.write('Od', df['time'].iloc[-1], 'zobaczyłxś',fun[1], 'filmów, co daje ', int(fun[1]/(days_counter.days)), 'zobaczonych filmów dziennie')
-        st.write('Najczęściej oglądane kanały')
+        try:
+            is_date_exist = begin
+        except:            
+            st.write('Od', df['time'].iloc[-1], 'do', df['time'].iloc[0],'zobaczyłxś',fun[1], 'filmów, co daje ', int(fun[1]/(days_counter.days)), 'zobaczonych filmów dziennie')
+        st.write('Najczęściej oglądane kanały w podanym okresie')
         st.write(df['channel'].value_counts())
-
-        if channel in df['channel'].unique():            
-                df = df[df['channel']==channel]     
-
+        spelling_counter = 0
+        
+        try:
+            for char in channel:
+                if char in df['channel'].unique():
+                    spelling_counter +=1
+            
+            if spelling_counter == len(channel):
+                filtered_df = pd.DataFrame(data = [], columns = df.columns)
+                for i in range(len(channel)):
+                    part_df = df[df['channel'] == channel[i]]
+                    filtered_df = pd.concat([filtered_df,part_df])
+                df = filtered_df
+            else:
+                st.write('Coś jest nietak we wpisanych kanałach. Zostaną wyświetlone statystyki dla wszystkich kanałów')     
+        except:
+            pass
         if top_video:
                 st.write('Najczęściej oglądane wideo')
 
@@ -78,7 +130,7 @@ if file is not None:
 
                 
         if year:
-            st.write('Liczba wyświetleń wideo w danym roku')
+            st.write('Liczba wyświetleń wideo w danym roku')            
             st.bar_chart(df['year'].value_counts())
 
         if year_month:
