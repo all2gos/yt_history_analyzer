@@ -134,10 +134,15 @@ if file is not None:
                 st.write(df['wideo'][df['wideo'] != 'film, który został usunięty'].value_counts())
 
                 
-        if year:
-            st.write('Liczba wyświetleń wideo w danym roku')  
-            fig = plt.figure(figsize=(10,4))             
-            ax = sns.countplot(data=df, x='year', hue = 'channel')
+        if year:            
+            fig = plt.figure(figsize=(10,4))   
+            fig.set_title('Liczba wyświetleń w zależności od roku')
+            fig.set_ylabel('Liczba odtworzeń')
+            fig.set_xlabel('Rok') 
+            
+
+            ax = sns.countplot(data=df, x='year', hue = 'channel')   
+            ax.legend(labels='Kanały')         
             for container in ax.containers:
                 ax.bar_label(container)
             st.pyplot(fig)
