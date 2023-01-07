@@ -2,6 +2,7 @@ import pandas as pd
 import streamlit as st
 import datetime
 import numpy as np
+import seaborn as sns
 
 
 pd.options.mode.chained_assignment = None
@@ -19,7 +20,10 @@ Aby poddać analizie waszą historię YT musicie dysponować
 
 """
 
+
 """
+
+### Trwa przerwa techniczna
 -----------------------------------------------------------------------------------------------
 #### Aktualizacja 4.01.2023
 ###### Dodanie możliwości wyboru specyficznego okresu poddawanego analizie
@@ -130,8 +134,8 @@ if file is not None:
 
                 
         if year:
-            st.write('Liczba wyświetleń wideo w danym roku')            
-            st.bar_chart(df['year'].value_counts())
+            st.write('Liczba wyświetleń wideo w danym roku')   
+            sns.countplot(df['year'],hue='channel')
 
         if year_month:
             st.write('Liczba wyświetleń wideo w danym miesiącu')
