@@ -55,6 +55,8 @@ def data_preprocessing(file):
             df['channel'].iloc[item] = df['channel'].iloc[item][0]['name']
         except:
             list_of_nan.append(item)
+        if df['channel'].iloc[item] == 'sanahVEVO':
+            df['channel'].iloc[item] == 'sanah'
         df['hour'].iloc[item] = df['time'].iloc[item][11:13]
         df['year_month'].iloc[item] = df['time'].iloc[item][:7]
         df['time'].iloc[item] = df['time'].iloc[item][:10]
