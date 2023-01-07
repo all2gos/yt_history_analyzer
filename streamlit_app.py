@@ -175,10 +175,9 @@ if file is not None:
             fig = plt.figure(figsize=(10,4))             
             ax = sns.countplot(data=df, x='day_of_week', hue = 'channel')   
             ax.legend(title='Kanały')  
-            ax.set_title('Liczba wyświetleń w zależności od dnia tygodnia')
+            ax.set_title('Liczba wyświetleń w zależności od dnia tygodnia (poniedziałek = 0)')
             ax.set_ylabel('Liczba odtworzeń')
-            ax.set_xlabel('Dzień tygodnia') 
-            ax.xticks(['pon','wt','sr','czw','pt','sob','ndz'])  
+            ax.set_xlabel('Dzień tygodnia')            
             if mark:     
                 for container in ax.containers:
                     ax.bar_label(container)
