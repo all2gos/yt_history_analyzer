@@ -139,7 +139,7 @@ if file is not None:
             fig = plt.figure(figsize=(10,4))             
             ax = sns.countplot(data=df, x='year', hue = 'channel')   
             ax.legend(title='Kanały')  
-            ax.set_title('Liczba wyświetleń w zależności od roku, dla okresu',str(begin),'-',str(end))
+            ax.set_title('Liczba wyświetleń w zależności od roku, dla okresu',str(begin))
             ax.set_ylabel('Liczba odtworzeń')
             ax.set_xlabel('Rok')   
             if mark:     
