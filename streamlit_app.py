@@ -30,7 +30,8 @@ Aby poddać analizie waszą historię YT musicie dysponować
 ###### (Opcjonalnie) zmiana linku strony na krótszy, łatwiejszy do zapamiętania 
 -----------------------------------------------------------------------------------------------
 ###### Aktualizacja 4.01.2023
-####### Dodanie możliwości wyboru specyficznego okresu poddawanego analizie
+
+Dodanie możliwości wyboru specyficznego okresu poddawanego analizie
 -------------------------------------------------------------------------------------------------
 ###### Wszelkie bugi można zgłaszać korzystając z opcji z menu w prawym górnym rogu. Będę wdzięczny za każdy feedback
 -------------------------------------------------------------------------------------------------
