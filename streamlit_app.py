@@ -135,7 +135,7 @@ if file is not None:
                 
         if year:
             st.write('Liczba wyświetleń wideo w danym roku')   
-            sns.countplot(data=df['year'])
+            sns.countplot(data=df, x='year')
 
         if year_month:
             st.write('Liczba wyświetleń wideo w danym miesiącu')
