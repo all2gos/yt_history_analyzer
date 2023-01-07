@@ -137,7 +137,7 @@ if file is not None:
         if year:
             st.write('Liczba wyświetleń wideo w danym roku')  
             fig = plt.figure(figsize=(10,4))             
-            sns.countplot(data=df, x='year')
+            sns.countplot(data=df, x='year', hue = 'channel')
             st.pyplot(fig)
 
         if year_month:
