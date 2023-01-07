@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 pd.options.mode.chained_assignment = None
 st.set_page_config(page_title='yt_analyzer', page_icon=':mag:')
-st.title('LSowa analiza')
+st.title('Analiza historii YouTube')
 
 
 """
