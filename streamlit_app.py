@@ -95,7 +95,7 @@ data_choice = st.checkbox('Zaznacz jeśli chcesz sprawdzić statystyki dla specy
 if data_choice:
     begin = st.date_input('Data początkowa')
     end = st.date_input('Data końcowa')
-mark = st.checkbox('chcę, żeby nad każdą kolumną w wykresie była wyświetlona wartość liczbowa')
+mark = st.checkbox('Zaznacz jeśli chcesz, żeby nad każdą kolumną w wykresie była wyświetlona wartość liczbowa')
 
 """
 -------------------------------------------------------------------------------------------------
