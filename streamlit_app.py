@@ -85,6 +85,7 @@ year_month = st.checkbox('miesiącu')
 month = st.checkbox('rodzaju miesiąca (np. wszystkie stycznie)')
 day = st.checkbox('rodzaju dnia tygodni (np. poniedziałki)')
 hour = st.checkbox('godzinie')
+mark = st.checkbox('chcę, żeby nad każdą kolumną w wykresie była wyświetlona wartość liczbowa')
 st.write('Dopiero po wybraniu wszystkich interesujących Cię opcji naciśnij "Compute"')
 compute = st.button('Compute')
 
@@ -151,9 +152,10 @@ if file is not None:
             ax.legend(title='Kanały')  
             ax.set_title('Liczba wyświetleń w zależności od miesiąca')
             ax.set_ylabel('Liczba odtworzeń')
-            ax.set_xlabel('Miesiąc')        
-            for container in ax.containers:
-                ax.bar_label(container)
+            ax.set_xlabel('Miesiąc')  
+            if mark:      
+                for container in ax.containers:
+                    ax.bar_label(container)
             st.pyplot(fig)
 
         if month:
@@ -162,9 +164,10 @@ if file is not None:
             ax.legend(title='Kanały')  
             ax.set_title('Liczba wyświetleń w zależności od rodzaju miesiąca')
             ax.set_ylabel('Liczba odtworzeń')
-            ax.set_xlabel('Rodzaj miesiąca')        
-            for container in ax.containers:
-                ax.bar_label(container)
+            ax.set_xlabel('Rodzaj miesiąca')  
+            if mark:      
+                for container in ax.containers:
+                    ax.bar_label(container)
             st.pyplot(fig)
 
         if day:
@@ -173,9 +176,10 @@ if file is not None:
             ax.legend(title='Kanały')  
             ax.set_title('Liczba wyświetleń w zależności od dnia tygodnia')
             ax.set_ylabel('Liczba odtworzeń')
-            ax.set_xlabel('Dzień tygodnia')        
-            for container in ax.containers:
-                ax.bar_label(container)
+            ax.set_xlabel('Dzień tygodnia')   
+            if mark:     
+                for container in ax.containers:
+                    ax.bar_label(container)
             st.pyplot(fig)
         if hour:
             fig = plt.figure(figsize=(10,4))             
@@ -183,7 +187,8 @@ if file is not None:
             ax.legend(title='Kanały')  
             ax.set_title('Liczba wyświetleń w zależności od godziny')
             ax.set_ylabel('Liczba odtworzeń')
-            ax.set_xlabel('Godzina')        
-            for container in ax.containers:
-                ax.bar_label(container)
+            ax.set_xlabel('Godzina')  
+            if mark:      
+                for container in ax.containers:
+                    ax.bar_label(container)
             st.pyplot(fig)
