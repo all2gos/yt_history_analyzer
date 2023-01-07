@@ -23,7 +23,7 @@ Aby poddać analizie waszą historię YT musicie dysponować
 
 """
 
-### Trwa przerwa techniczna
+### Trwa przerwa techniczna !!! Nie wszystkie funkcjonalności mogą działać poprawnie
 -----------------------------------------------------------------------------------------------
 #### Aktualizacja 4.01.2023
 ###### Dodanie możliwości wyboru specyficznego okresu poddawanego analizie
@@ -135,7 +135,7 @@ if file is not None:
                 
         if year:
             st.write('Liczba wyświetleń wideo w danym roku')   
-            sns.countplot(df['year'],hue='channel')
+            sns.countplot(df['year'],hue=df['channel'])
 
         if year_month:
             st.write('Liczba wyświetleń wideo w danym miesiącu')
