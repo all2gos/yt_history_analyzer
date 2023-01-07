@@ -20,19 +20,19 @@ Aby poddać analizie waszą historię YT musicie dysponować
 [plikiem w formacie JSON z historią oglądania](https://youtu.be/OMc7w1DinPM?t=804)
 
 """
-
-
 """
-
-### Trwa przerwa techniczna !!! Nie wszystkie funkcjonalności mogą działać poprawnie
 -----------------------------------------------------------------------------------------------
-#### Aktualizacja 4.01.2023
-###### Dodanie możliwości wyboru specyficznego okresu poddawanego analizie
-
+#### Aktualizacja 7.01.2023
+###### Dodanie możliwości wyboru kilku kanałów żeby porównywać ich statystyki między sobą, opcja ta jest w pełni funkcjonalna z wybieraniem specyficznego okresu
 ###### Plany:
-###### Dodanie możliwości wyboru kilku kanałów żeby porównywać ich statystyki między sobą
+###### Możliwość analizowania najczęściej oglądanych filmów na tej samej zasadzie jak teraz można analizować kanały
+###### Przetłumaczenie całego interfejsu strony na język angielski
+###### (Opcjonalnie) zmiana linku strony na krótszy, łatwiejszy do zapamiętania 
+-----------------------------------------------------------------------------------------------
+###### Aktualizacja 4.01.2023
+######## Dodanie możliwości wyboru specyficznego okresu poddawanego analizie
 
-###### Wszelkie bugi można zgłaszać korzystając z opcji z menu w prawym górnym rogu. Będe wzdzięczny za każdy feedback
+###### Wszelkie bugi można zgłaszać korzystając z opcji z menu w prawym górnym rogu. Będę wdzięczny za każdy feedback
 -------------------------------------------------------------------------------------------------
 """
 
@@ -48,7 +48,7 @@ def data_preprocessing(file):
     df['year_month'] = df['time']
     df['wideo'] = df['time']    
     df['channel'] = df['subtitles']
-    st.write('Konwertowanie pliku JSON trwa. Proszę o cierpliwość ten proces może trwać nawet kilka minut')   
+    st.write('Generowanie statystyk trwa. Proszę o cierpliwość ten proces może trwać nawet kilka minut')   
     list_of_nan = []
     for item in range(len(df)):
         try:
@@ -66,9 +66,10 @@ def data_preprocessing(file):
     return df, len(df)
 
 file = st.file_uploader("Tutaj wklej swoją historię")
-channel_menu = st.checkbox('Zaznacz, jeśli chcesz sprawdzić statystyki dla konkretnego kanału')
+channel_menu = st.checkbox('Zaznacz, jeśli chcesz sprawdzić statystyki dla konkretnych kanałów')
 if channel_menu:    
-    channel = st.text_input('','Wpisz nazwe kanału (uwaga na literówki)').split(',')
+    st.write('W przypadku wpisywania większej liczby kanałów należy robić to bez żadnych spacji (chyba, że spacje występują w nazwie kanału), oddzielając poszczególne kanały przecinkiem np. "Lekko Stronniczy,sanah,Ziemniak')
+    channel = st.text_input('','Wpisz nazwe kanałów (uwaga na literówki)').split(',')
     st.write('Jeżeli wpiszesz kanał, który nie występuje w Twojej historii wówczas statystyki dalej będą wyświetalne dla wszystkich kanałów')
 
 data_choice = st.checkbox('Zaznacz jeśli chcesz sprawdzić statystyki dla specyficznego okresu')
@@ -79,6 +80,7 @@ if data_choice:
 
 st.write('Wybierz jakie statystyki chcesz zobaczyć')
 
+top_channel = st.checkbox('Najczęściej oglądane kanały')
 top_video = st.checkbox('Najczęściej oglądane filmy')
 
 st.write('Liczbę filmów zobaczonych w danym:')
@@ -112,10 +114,12 @@ if file is not None:
             is_date_exist = begin
         except:            
             st.write('Od', df['time'].iloc[-1], 'do', df['time'].iloc[0],'zobaczyłxś',fun[1], 'filmów, co daje ', int(fun[1]/(days_counter.days)), 'zobaczonych filmów dziennie')
-        st.write('Najczęściej oglądane kanały w podanym okresie')
-        st.write(df['channel'].value_counts())
-        spelling_counter = 0
         
+        if top_channel:
+            st.write('Najczęściej oglądane kanały w podanym okresie')
+            st.write(df['channel'].value_counts())
+
+        spelling_counter = 0        
         try:
             for char in channel:
                 if char in df['channel'].unique():
