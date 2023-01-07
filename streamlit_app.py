@@ -3,6 +3,7 @@ import streamlit as st
 import datetime
 import numpy as np
 import seaborn as sns
+import matplotlib.pyplot as plt
 
 
 pd.options.mode.chained_assignment = None
@@ -134,8 +135,10 @@ if file is not None:
 
                 
         if year:
-            st.write('Liczba wyświetleń wideo w danym roku')   
+            st.write('Liczba wyświetleń wideo w danym roku')  
+            fig = plt.figure(figsize=(10,4))             
             sns.countplot(data=df, x='year')
+            st.pyplot(fig)
 
         if year_month:
             st.write('Liczba wyświetleń wideo w danym miesiącu')
