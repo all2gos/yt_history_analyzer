@@ -135,14 +135,12 @@ if file is not None:
 
                 
         if year:            
-            fig = plt.figure(figsize=(10,4))   
-            fig.set_title('Liczba wyświetleń w zależności od roku')
-            fig.set_ylabel('Liczba odtworzeń')
-            fig.set_xlabel('Rok') 
-            
-
+            fig = plt.figure(figsize=(10,4))             
             ax = sns.countplot(data=df, x='year', hue = 'channel')   
-            ax.legend(labels='Kanały')         
+            ax.legend(labels='Kanały')  
+            ax.set_title('Liczba wyświetleń w zależności od roku')
+            ax.set_ylabel('Liczba odtworzeń')
+            ax.set_xlabel('Rok')        
             for container in ax.containers:
                 ax.bar_label(container)
             st.pyplot(fig)
