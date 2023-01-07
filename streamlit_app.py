@@ -86,7 +86,7 @@ hour = st.checkbox('godzinie')
 
 channel_menu = st.checkbox('Zaznacz, jeśli chcesz sprawdzić statystyki dla konkretnych kanałów')
 if channel_menu:    
-    st.write('W przypadku wpisywania większej liczby kanałów należy robić to bez żadnych spacji (chyba, że spacje występują w nazwie kanału), oddzielając poszczególne kanały przecinkiem np. "Lekko Stronniczy,sanah,Ziemniak')
+    st.write('W przypadku wpisywania większej liczby kanałów należy robić to bez żadnych spacji (chyba, że spacje występują w nazwie kanału), oddzielając poszczególne kanały przecinkiem np. "Lekko Stronniczy,sanah,Ziemniak"')
     channel = st.text_input('','Wpisz nazwe kanałów (uwaga na literówki)').split(',')
     st.write('Jeżeli wpiszesz kanał, który nie występuje w Twojej historii wówczas statystyki dalej będą wyświetalne dla wszystkich kanałów')
 
