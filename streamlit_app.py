@@ -23,7 +23,7 @@ Aby poddać analizie waszą historię YT musicie dysponować
 """
 -----------------------------------------------------------------------------------------------
 #### Aktualizacja 7.01.2023
-###### Dodanie możliwości wyboru kilku kanałów żeby porównywać ich statystyki między sobą, opcja ta jest w pełni funkcjonalna z wybieraniem specyficznego okresu
+###### Dodanie możliwości wyboru kilku kanałów żeby porównywać ich statystyki między sobą. Opcja ta jest w pełni kompatybilna z wybieraniem specyficznego okresu
 ###### Plany:
 ###### Możliwość analizowania najczęściej oglądanych filmów na tej samej zasadzie jak teraz można analizować kanały
 ###### Przetłumaczenie całego interfejsu strony na język angielski
@@ -66,17 +66,6 @@ def data_preprocessing(file):
     return df, len(df)
 
 file = st.file_uploader("Tutaj wklej swoją historię")
-channel_menu = st.checkbox('Zaznacz, jeśli chcesz sprawdzić statystyki dla konkretnych kanałów')
-if channel_menu:    
-    st.write('W przypadku wpisywania większej liczby kanałów należy robić to bez żadnych spacji (chyba, że spacje występują w nazwie kanału), oddzielając poszczególne kanały przecinkiem np. "Lekko Stronniczy,sanah,Ziemniak')
-    channel = st.text_input('','Wpisz nazwe kanałów (uwaga na literówki)').split(',')
-    st.write('Jeżeli wpiszesz kanał, który nie występuje w Twojej historii wówczas statystyki dalej będą wyświetalne dla wszystkich kanałów')
-
-data_choice = st.checkbox('Zaznacz jeśli chcesz sprawdzić statystyki dla specyficznego okresu')
-
-if data_choice:
-    begin = st.date_input('Data początkowa')
-    end = st.date_input('Data końcowa')
 
 st.write('Wybierz jakie statystyki chcesz zobaczyć')
 
@@ -89,7 +78,29 @@ year_month = st.checkbox('miesiącu')
 month = st.checkbox('rodzaju miesiąca (np. wszystkie stycznie)')
 day = st.checkbox('rodzaju dnia tygodni (np. poniedziałki)')
 hour = st.checkbox('godzinie')
+
+"""
+-------------------------------------------------------------------------------------------------
+#### Zaawansowane filtrowanie
+"""
+
+channel_menu = st.checkbox('Zaznacz, jeśli chcesz sprawdzić statystyki dla konkretnych kanałów')
+if channel_menu:    
+    st.write('W przypadku wpisywania większej liczby kanałów należy robić to bez żadnych spacji (chyba, że spacje występują w nazwie kanału), oddzielając poszczególne kanały przecinkiem np. "Lekko Stronniczy,sanah,Ziemniak')
+    channel = st.text_input('','Wpisz nazwe kanałów (uwaga na literówki)').split(',')
+    st.write('Jeżeli wpiszesz kanał, który nie występuje w Twojej historii wówczas statystyki dalej będą wyświetalne dla wszystkich kanałów')
+
+data_choice = st.checkbox('Zaznacz jeśli chcesz sprawdzić statystyki dla specyficznego okresu')
+
+if data_choice:
+    begin = st.date_input('Data początkowa')
+    end = st.date_input('Data końcowa')
 mark = st.checkbox('chcę, żeby nad każdą kolumną w wykresie była wyświetlona wartość liczbowa')
+
+"""
+-------------------------------------------------------------------------------------------------
+
+"""
 st.write('Dopiero po wybraniu wszystkich interesujących Cię opcji naciśnij "Compute"')
 compute = st.button('Compute')
 
