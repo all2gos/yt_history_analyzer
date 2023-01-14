@@ -164,6 +164,7 @@ if file is not None:
                     part_df = df[df['wideo'] == channel[i]]
                     filtered_df = pd.concat([filtered_df,part_df])
                 df = filtered_df
+                st.write(df)
             else:
                 st.write('Coś jest nietak we wpisanych wideo. Zostaną wyświetlone statystyki dla wszystkich kanałów')     
         except:
