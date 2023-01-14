@@ -135,10 +135,13 @@ if file is not None:
             st.write('Najczęściej oglądane kanały w podanym okresie')
             st.write(df['channel'].value_counts())
 
-        spelling_counter = 0        
-        try:
+        spelling_counter = 0  
+        try: 
             if channel == 'df':
-                st.write(df)
+                st.write(df)     
+        except:
+            pass
+        try: 
             for char in channel:
                 if char in df['channel'].unique():
                     spelling_counter +=1
