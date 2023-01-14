@@ -159,7 +159,7 @@ if file is not None:
                 if char in df['wideo'].unique():
                     spelling_counter +=1
                     st.write('znalazlem')
-            
+            st.write(spelling_counter, len(video))
             if spelling_counter == len(video):
                 filtered_df = pd.DataFrame(data = [], columns = df.columns)
                 for i in range(len(video)):
