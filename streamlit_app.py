@@ -112,7 +112,8 @@ compute = st.button('Compute')
 if file is not None:    
     if compute:        
         fun = data_preprocessing(file)
-        df = fun[0]
+        df = fun[0]   
+        st.write(df)     
         try:  
             is_date_exist = begin
             pre_data_df= fun[0]
@@ -136,11 +137,6 @@ if file is not None:
             st.write(df['channel'].value_counts())
 
         spelling_counter = 0  
-        try: 
-            if channel == 'df':
-                st.write(df)     
-        except:
-            pass
         try: 
             for char in channel:
                 if char in df['channel'].unique():
