@@ -94,7 +94,7 @@ if channel_menu:
 video_menu = st.checkbox('Zaznacz jeśli chcesz sprawdzić statystyki dla konkretnych wideo')
 if video_menu:
     st.write('Zasady wpisywania wideo są takie samej jak w przypadku wpisywania kanałów - uczulam ponownie na literówki')
-    video = st.text_input('','Wpisz nazwe kanałów (uwaga na literówki)').split(',')
+    video = st.multiselect('','Wpisz nazwe kanałów (uwaga na literówki)').split(',')
 data_choice = st.checkbox('Zaznacz jeśli chcesz sprawdzić statystyki dla specyficznego okresu')
 
 if data_choice:
@@ -113,7 +113,7 @@ if file is not None:
     if compute:        
         fun = data_preprocessing(file)
         df = fun[0]   
-        st.write(df)     
+        #st.write(df)     
         try:  
             is_date_exist = begin
             pre_data_df= fun[0]
