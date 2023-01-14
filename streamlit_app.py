@@ -94,7 +94,7 @@ if channel_menu:
 video_menu = st.checkbox('Zaznacz jeśli chcesz sprawdzić statystyki dla konkretnych wideo')
 if video_menu:
     st.write('Zasady wpisywania wideo są takie samej jak w przypadku wpisywania kanałów - uczulam ponownie na literówki')
-    video = st.multiselect('','Wpisz nazwe kanałów (uwaga na literówki)').split(',')
+    video = st.multiselect('Wpisz nazwe kanałów (uwaga na literówki)',df['wideo'].unique())
 data_choice = st.checkbox('Zaznacz jeśli chcesz sprawdzić statystyki dla specyficznego okresu')
 
 if data_choice:
