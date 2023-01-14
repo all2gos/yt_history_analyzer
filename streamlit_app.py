@@ -174,11 +174,15 @@ if file is not None:
 
                 st.write(df['wideo'][df['wideo'] != 'film, który został usunięty'].value_counts())
 
-
-        if video:
-            var = 'wideo'
-        if channel:
-            var = 'channel'     
+        try:
+            if video:
+                var = 'wideo'
+        except:
+            try:
+                if channel:
+                    var = 'channel'    
+            except:
+                pass 
         if year:            
             fig = plt.figure(figsize=(10,4))             
             ax = sns.countplot(data=df, x='year', hue = var)   
