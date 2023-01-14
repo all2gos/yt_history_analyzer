@@ -155,11 +155,9 @@ if file is not None:
 
         try:
             for char in video:
-                st.write(char)
                 if char in df['wideo'].unique():
                     spelling_counter +=1
                     st.write('znalazlem')
-            st.write(spelling_counter, len(video))
             if spelling_counter == len(video):
                 filtered_df = pd.DataFrame(data = [], columns = df.columns)
                 for i in range(len(video)):
@@ -180,16 +178,18 @@ if file is not None:
         try:
             if video:
                 var = 'wideo'
+                title = 'wideo'
         except:
             try:
                 if channel:
                     var = 'channel'    
+                    title = 'Kanały'
             except:
                 pass 
         if year:            
             fig = plt.figure(figsize=(10,4))             
             ax = sns.countplot(data=df, x='year', hue = var)   
-            ax.legend(title='Kanały')  
+            ax.legend(title=title)  
             ax.set_title('Liczba wyświetleń w zależności od roku')
             ax.set_ylabel('Liczba odtworzeń')
             ax.set_xlabel('Rok')   
@@ -201,7 +201,7 @@ if file is not None:
         if year_month:
             fig = plt.figure(figsize=(10,4))             
             ax = sns.countplot(data=df, x='year_month', hue = var)   
-            ax.legend(title='Kanały')  
+            ax.legend(title=title)  
             ax.set_title('Liczba wyświetleń w zależności od miesiąca')
             ax.set_ylabel('Liczba odtworzeń')
             ax.set_xlabel('Miesiąc')  
@@ -213,7 +213,7 @@ if file is not None:
         if month:
             fig = plt.figure(figsize=(10,4))             
             ax = sns.countplot(data=df, x='month', hue = var)   
-            ax.legend(title='Kanały')  
+            ax.legend(title=title)  
             ax.set_title('Liczba wyświetleń w zależności od rodzaju miesiąca')
             ax.set_ylabel('Liczba odtworzeń')
             ax.set_xlabel('Rodzaj miesiąca')  
@@ -225,7 +225,7 @@ if file is not None:
         if day:
             fig = plt.figure(figsize=(10,4))             
             ax = sns.countplot(data=df, x='day_of_week', hue = var)   
-            ax.legend(title='Kanały')  
+            ax.legend(title=title)  
             ax.set_title('Liczba wyświetleń w zależności od dnia tygodnia (poniedziałek = 0)')
             ax.set_ylabel('Liczba odtworzeń')
             ax.set_xlabel('Dzień tygodnia')            
@@ -236,7 +236,7 @@ if file is not None:
         if hour:
             fig = plt.figure(figsize=(10,4))             
             ax = sns.countplot(data=df, x='hour', hue = var)   
-            ax.legend(title='Kanały')  
+            ax.legend(title=title)  
             ax.set_title('Liczba wyświetleń w zależności od godziny')
             ax.set_ylabel('Liczba odtworzeń')
             ax.set_xlabel('Godzina')  
