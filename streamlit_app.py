@@ -155,8 +155,10 @@ if file is not None:
 
         try:
             for char in video:
+                st.write(char)
                 if char in df['wideo'].unique():
                     spelling_counter +=1
+                    st.write('znalazlem')
             
             if spelling_counter == len(video):
                 filtered_df = pd.DataFrame(data = [], columns = df.columns)
@@ -164,7 +166,7 @@ if file is not None:
                     part_df = df[df['wideo'] == channel[i]]
                     filtered_df = pd.concat([filtered_df,part_df])
                 df = filtered_df
-                st.write(df)
+                
             else:
                 st.write('Coś jest nietak we wpisanych wideo. Zostaną wyświetlone statystyki dla wszystkich kanałów')     
         except:
