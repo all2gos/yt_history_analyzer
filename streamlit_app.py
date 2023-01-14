@@ -174,10 +174,14 @@ if file is not None:
 
                 st.write(df['wideo'][df['wideo'] != 'film, który został usunięty'].value_counts())
 
-                
+
+        if video:
+            var = 'wideo'
+        if channel:
+            var = 'channel'     
         if year:            
             fig = plt.figure(figsize=(10,4))             
-            ax = sns.countplot(data=df, x='year', hue = 'channel')   
+            ax = sns.countplot(data=df, x='year', hue = var)   
             ax.legend(title='Kanały')  
             ax.set_title('Liczba wyświetleń w zależności od roku')
             ax.set_ylabel('Liczba odtworzeń')
@@ -189,7 +193,7 @@ if file is not None:
 
         if year_month:
             fig = plt.figure(figsize=(10,4))             
-            ax = sns.countplot(data=df, x='year_month', hue = 'channel')   
+            ax = sns.countplot(data=df, x='year_month', hue = var)   
             ax.legend(title='Kanały')  
             ax.set_title('Liczba wyświetleń w zależności od miesiąca')
             ax.set_ylabel('Liczba odtworzeń')
@@ -201,7 +205,7 @@ if file is not None:
 
         if month:
             fig = plt.figure(figsize=(10,4))             
-            ax = sns.countplot(data=df, x='month', hue = 'channel')   
+            ax = sns.countplot(data=df, x='month', hue = var)   
             ax.legend(title='Kanały')  
             ax.set_title('Liczba wyświetleń w zależności od rodzaju miesiąca')
             ax.set_ylabel('Liczba odtworzeń')
@@ -213,7 +217,7 @@ if file is not None:
 
         if day:
             fig = plt.figure(figsize=(10,4))             
-            ax = sns.countplot(data=df, x='day_of_week', hue = 'channel')   
+            ax = sns.countplot(data=df, x='day_of_week', hue = var)   
             ax.legend(title='Kanały')  
             ax.set_title('Liczba wyświetleń w zależności od dnia tygodnia (poniedziałek = 0)')
             ax.set_ylabel('Liczba odtworzeń')
@@ -224,7 +228,7 @@ if file is not None:
             st.pyplot(fig)
         if hour:
             fig = plt.figure(figsize=(10,4))             
-            ax = sns.countplot(data=df, x='hour', hue = 'channel')   
+            ax = sns.countplot(data=df, x='hour', hue = var)   
             ax.legend(title='Kanały')  
             ax.set_title('Liczba wyświetleń w zależności od godziny')
             ax.set_ylabel('Liczba odtworzeń')
