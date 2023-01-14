@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 pd.options.mode.chained_assignment = None
 st.set_page_config(page_title='yt_analyzer', page_icon=':mag:')
-st.title('Przerwa techniczna')
+st.title('Analiza historii oglądania YT')
 
 
 """
@@ -21,18 +21,15 @@ Aby poddać analizie waszą historię YT musicie dysponować
 
 """
 """
+#### Aktualizacji 14.01.2023
+###### Dodanie możliwości analizowania przebiegu oglądania kilku wybranych wideo
+
+#### W planach: poprawienie responsywności strony
 -----------------------------------------------------------------------------------------------
 #### Aktualizacja 7.01.2023
 ###### Dodanie możliwości wyboru kilku kanałów żeby porównywać ich statystyki między sobą. Opcja ta jest w pełni kompatybilna z wybieraniem specyficznego okresu
-###### Plany:
-###### Możliwość analizowania najczęściej oglądanych filmów na tej samej zasadzie jak teraz można analizować kanały
-###### Przetłumaczenie całego interfejsu strony na język angielski
-###### (Opcjonalnie) zmiana linku strony na krótszy, łatwiejszy do zapamiętania 
 -----------------------------------------------------------------------------------------------
-###### Aktualizacja 4.01.2023
-Dodanie możliwości wyboru specyficznego okresu poddawanego analizie
-
-###### Wszelkie bugi można zgłaszać korzystając z opcji w menu w prawym górnym rogu. Będę wdzięczny za każdy feedback
+###### Coś nie działa? Masz sugestie co mogę poprawić? Pisz śmiało na stottkoraf@gmail.com
 -------------------------------------------------------------------------------------------------
 """
 
@@ -93,7 +90,7 @@ if channel_menu:
     st.write('Jeżeli wpiszesz kanał, który nie występuje w Twojej historii wówczas statystyki dalej będą wyświetalne dla wszystkich kanałów')
 video_menu = st.checkbox('Zaznacz jeśli chcesz sprawdzić statystyki dla konkretnych wideo')
 if video_menu:
-    st.write('W przypadku wpisywania większej liczby wideo należy robić to bez żadnych spacji (chyba, że spacje występują w tytule wideo), oddzielając poszczególne kanały średnikiem np. "Nie Kłami;Ed Sheeran - Give Me Love (Official Music Video)" Polecam wyświetlić sobie top oglądane wideo, a następnie do notatki gdzieś przeklejać dokładne nazwy. To bardzo toporne - wiem, dlatego jest w planach wprowadzenie wyświetlania najpopularniejszych wideo w danym okresie, a ta opcja zostanie typowo do śledzenia historii jednego, może dwóch wideo naraz')
+    st.write('UWAGA, TO DZIAŁA BARDZO WOLNO. W przypadku wpisywania większej liczby wideo należy robić to bez żadnych spacji (chyba, że spacje występują w tytule wideo), oddzielając poszczególne kanały średnikiem np. "Nie Kłami;Ed Sheeran - Give Me Love (Official Music Video)" Polecam wyświetlić sobie top oglądane wideo, a następnie do notatki gdzieś przeklejać dokładne nazwy. To bardzo toporne - wiem, dlatego jest w planach wprowadzenie wyświetlania najpopularniejszych wideo w danym okresie, a ta opcja zostanie typowo do śledzenia historii jednego, może dwóch wideo naraz')
     video = st.text_input('','Wpisz nazwe kanałów (uwaga na literówki)').split(';')
 data_choice = st.checkbox('Zaznacz jeśli chcesz sprawdzić statystyki dla specyficznego okresu')
 
@@ -157,7 +154,6 @@ if file is not None:
             for char in video:
                 if char in df['wideo'].unique():
                     spelling_counter +=1
-                    st.write('znalazlem')
             if spelling_counter == len(video):
                 filtered_df = pd.DataFrame(data = [], columns = df.columns)
                 for i in range(len(video)):
