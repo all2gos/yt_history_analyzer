@@ -165,7 +165,7 @@ if file is not None:
                     filtered_df = pd.concat([filtered_df,part_df])
                 df = filtered_df
             else:
-                st.write('Coś jest nietak we wpisanych kanałach. Zostaną wyświetlone statystyki dla wszystkich kanałów')     
+                st.write('Coś jest nietak we wpisanych wideo. Zostaną wyświetlone statystyki dla wszystkich kanałów')     
         except:
             pass
 
