@@ -163,7 +163,7 @@ if file is not None:
             if spelling_counter == len(video):
                 filtered_df = pd.DataFrame(data = [], columns = df.columns)
                 for i in range(len(video)):
-                    part_df = df[df['wideo'] == channel[i]]
+                    part_df = df[df['wideo'] == video[i]]
                     filtered_df = pd.concat([filtered_df,part_df])
                 df = filtered_df
                 
