@@ -154,7 +154,7 @@ if file is not None:
 
         try:
             for char in video:
-                if char in df['video'].unique():
+                if char in df['wideo'].unique():
                     spelling_counter +=1
             
             if spelling_counter == len(video):
