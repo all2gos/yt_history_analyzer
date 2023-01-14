@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 pd.options.mode.chained_assignment = None
 st.set_page_config(page_title='yt_analyzer', page_icon=':mag:')
-st.title('Analiza historii YouTube')
+st.title('Przerwa techniczna')
 
 
 """
@@ -91,7 +91,10 @@ if channel_menu:
     st.write('W przypadku wpisywania większej liczby kanałów należy robić to bez żadnych spacji (chyba, że spacje występują w nazwie kanału), oddzielając poszczególne kanały przecinkiem np. "Lekko Stronniczy,sanah,Ziemniak"')
     channel = st.text_input('','Wpisz nazwe kanałów (uwaga na literówki)').split(',')
     st.write('Jeżeli wpiszesz kanał, który nie występuje w Twojej historii wówczas statystyki dalej będą wyświetalne dla wszystkich kanałów')
-
+video_menu = st.checkbox('Zaznacz jeśli chcesz sprawdzić statystyki dla konkretnych wideo')
+if video_menu:
+    st.write('Zasady wpisywania wideo są takie samej jak w przypadku wpisywania kanałów - uczulam ponownie na literówki')
+    video = st.text_input('','Wpisz nazwe kanałów (uwaga na literówki)').split(',')
 data_choice = st.checkbox('Zaznacz jeśli chcesz sprawdzić statystyki dla specyficznego okresu')
 
 if data_choice:
@@ -148,6 +151,23 @@ if file is not None:
                 st.write('Coś jest nietak we wpisanych kanałach. Zostaną wyświetlone statystyki dla wszystkich kanałów')     
         except:
             pass
+
+        try:
+            for char in video:
+                if char in df['video'].unique():
+                    spelling_counter +=1
+            
+            if spelling_counter == len(video):
+                filtered_df = pd.DataFrame(data = [], columns = df.columns)
+                for i in range(len(video)):
+                    part_df = df[df['wideo'] == channel[i]]
+                    filtered_df = pd.concat([filtered_df,part_df])
+                df = filtered_df
+            else:
+                st.write('Coś jest nietak we wpisanych kanałach. Zostaną wyświetlone statystyki dla wszystkich kanałów')     
+        except:
+            pass
+
         if top_video:
                 st.write('Najczęściej oglądane wideo')
 
