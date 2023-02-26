@@ -22,7 +22,7 @@ Aby poddać analizie waszą historię YT musicie dysponować
 """
 """
 #### Aktualizacji 26.02.2023
-###### Poprawienie responsywności strony (pierwsze i nie ostatnie)
+###### Znaczne poprawienie responsywności strony
 ###### Dodanie paska postępu
 
 -----------------------------------------------------------------------------------------------
