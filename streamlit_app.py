@@ -47,6 +47,7 @@ def data_preprocessing(file):
     df['channel'] = df['subtitles']
     st.write('Generowanie statystyk trwa. Proszę o cierpliwość ten proces może trwać nawet kilka minut')   
     list_of_nan = []
+    percent_complete = 0
     for item in range(len(df)):
         try:
             df['channel'].iloc[item] = df['channel'].iloc[item][0]['name']
@@ -60,7 +61,15 @@ def data_preprocessing(file):
         df['year_month'].iloc[item] = df['time'].iloc[item][:7]
         df['time'].iloc[item] = df['time'].iloc[item][:10]
         df['wideo'].iloc[item] = df['title'].iloc[item][11:]   
-        df['time'].iloc[item] = datetime.date(int(df['time'].iloc[item][:4]),int(df['time'].iloc[item][5:7]),int(df['time'].iloc[item][8:])) 
+        df['time'].iloc[item] = datetime.date(int(df['time'].iloc[item][:4]),int(df['time'].iloc[item][5:7]),int(df['time'].iloc[item][8:]))
+
+        progress_text = "Operation in progress. Please wait."
+        my_bar = st.progress(0, text=progress_text)
+
+        
+        for i in range(len(df)):   
+            if i == int(len(df)/100):     
+                my_bar.progress(percent_complete + 1, text=progress_text) 
     st.write('W wyniku usuwania uszkodzonych informacji,', len(list_of_nan), 'pozycji z historii zostało usuniętych')
     return df, len(df)
 
@@ -108,7 +117,7 @@ compute = st.button('Compute')
 
 if file is not None:    
     if compute:        
-        fun = data_preprocessing(file)
+        fun = data_preprocessing(file)        
         df = fun[0]   
         st.write(df)     
         try:  
