@@ -48,7 +48,7 @@ def data_preprocessing(file):
             df['channel'].iloc[item] = df['channel'].iloc[item][0]['name']
         except:
             list_of_nan+=1
-            
+
         if item % int(len(df)/100)==0:   
             percent_complete+=1
             if percent_complete<101:              
@@ -56,7 +56,7 @@ def data_preprocessing(file):
 
     df['channel'] = df['channel'].map(lambda x: 'sanah' if x=='sanahVEVO' else x)
     df['channel'] = df['channel'].map(lambda x: 'Dobrzewiesz Nagrania' if x=='Pistacho95ldz' else x)
-    df['year_month'] = df['year_month'].map(lambda x: x[:7])
+    df['year_month'] = df['year_month'].map(lambda x: x[2:7])
     df['hour'] = df['hour'].map(lambda x: x[11:13])
     df['time'] = df['time'].map(lambda x: datetime.date(int(x[:4]),int(x[5:7]),int(x[8:10])))
     df['wideo'] = df['wideo'].map(lambda x: x[11:])
@@ -74,10 +74,10 @@ top_video = st.checkbox('Najczęściej oglądane filmy')
 
 st.write('Liczbę filmów zobaczonych w danym:')
 year = st.checkbox('roku')
-year_month = st.checkbox('miesiącu (chwilowo nie działa)')
+year_month = st.checkbox('miesiącu')
 month = st.checkbox('rodzaju miesiąca (np. wszystkie stycznie)')
 day = st.checkbox('rodzaju dnia tygodni (np. poniedziałki)')
-hour = st.checkbox('godzinie (chwilowo nie działa)')
+hour = st.checkbox('godzinie')
 
 """
 -------------------------------------------------------------------------------------------------
