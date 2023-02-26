@@ -92,8 +92,8 @@ if channel_menu:
     st.write('Jeżeli wpiszesz kanał, który nie występuje w Twojej historii wówczas statystyki dalej będą wyświetalne dla wszystkich kanałów')
 video_menu = st.checkbox('Zaznacz jeśli chcesz sprawdzić statystyki dla konkretnych wideo')
 if video_menu:
-    st.write('Żeby ułatwić wprowadzanie nazw filmów, podaj ile top n filmów (pod względem oglądania chcesz zobaczyć), im mniejsza jest podana wartość tym mniej topornie będzie to działać')
-    count = st.number_input('Ile topowych filmów ma zawierać lista?')   
+    st.write('W przypadku wpisywania większej liczby wideo należy robić to bez żadnych spacji (chyba, że spacje występują w tytule wideo), oddzielając poszczególne kanały średnikiem np. "Nie Kłami;Ed Sheeran - Give Me Love (Official Music Video)" Polecam wyświetlić sobie top oglądane wideo, a następnie do notatki gdzieś przeklejać dokładne nazwy. To bardzo toporne - wiem, dlatego jest w planach wprowadzenie wyświetlania najpopularniejszych wideo w danym okresie, a ta opcja zostanie typowo do śledzenia historii jednego, może dwóch wideo naraz')
+    video = st.text_input('','Wpisz nazwe kanałów (uwaga na literówki)').split(';')
 data_choice = st.checkbox('Zaznacz jeśli chcesz sprawdzić statystyki dla specyficznego okresu')
 
 if data_choice:
@@ -131,9 +131,6 @@ if file is not None:
         except:            
             st.write('Od', df['time'].iloc[-1], 'do', df['time'].iloc[0],'zobaczyłxś',fun[1], 'filmów, co daje ', int(fun[1]/(days_counter.days)), 'zobaczonych filmów dziennie')
         
-        if count != 'Ile topowych filmów ma zawierać lista?':
-            video = st.multiselect('Wybierz filmy, których historię oglądania chcesz prześledzić', (df['wideo'].value_counts()[1:int(count)].to_dict()))
-            st.write(video)
         if top_channel:
             st.write('Najczęściej oglądane kanały w podanym okresie')
             st.write(df['channel'].value_counts())
@@ -153,7 +150,7 @@ if file is not None:
             else:
                 st.write('Coś jest nietak we wpisanych kanałach. Zostaną wyświetlone statystyki dla wszystkich kanałów')     
         except:
-            pass        
+            pass
 
         try:
             for char in video:
