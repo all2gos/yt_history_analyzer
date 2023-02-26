@@ -198,7 +198,7 @@ if file is not None:
             st.pyplot(fig)
 
         if year_month:
-            fig = plt.figure(figsize=(10,4))    
+            fig = plt.figure(figsize=(20,4))    
             plt.tight_layout()         
             ax = sns.countplot(data=df, x='year_month', hue = var)   
             ax.legend(title=title)  
