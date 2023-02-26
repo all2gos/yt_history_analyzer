@@ -67,9 +67,9 @@ def data_preprocessing(file):
         my_bar = st.progress(0)
 
         
-        for i in range(len(df)):   
-            if i == int(len(df)/100):     
-                my_bar.progress(percent_complete + 1) 
+         
+        if item == int(len(df)/100):     
+            my_bar.progress(percent_complete + 1) 
     st.write('W wyniku usuwania uszkodzonych informacji,', len(list_of_nan), 'pozycji z historii zostało usuniętych')
     return df, len(df)
 
