@@ -48,6 +48,7 @@ def data_preprocessing(file):
     st.write('Generowanie statystyk trwa. Proszę o cierpliwość ten proces może trwać nawet kilka minut')   
     list_of_nan = []
     percent_complete = 0
+    my_bar = st.progress(0)
     for item in range(len(df)):
         try:
             df['channel'].iloc[item] = df['channel'].iloc[item][0]['name']
@@ -62,12 +63,6 @@ def data_preprocessing(file):
         df['time'].iloc[item] = df['time'].iloc[item][:10]
         df['wideo'].iloc[item] = df['title'].iloc[item][11:]   
         df['time'].iloc[item] = datetime.date(int(df['time'].iloc[item][:4]),int(df['time'].iloc[item][5:7]),int(df['time'].iloc[item][8:]))
-
-        
-        my_bar = st.progress(0)
-
-        
-         
         if item == int(len(df)/100):     
             my_bar.progress(percent_complete + 1) 
     st.write('W wyniku usuwania uszkodzonych informacji,', len(list_of_nan), 'pozycji z historii zostało usuniętych')
