@@ -60,7 +60,7 @@ def data_preprocessing(file):
 
     df['channel'] = df['channel'].map(lambda x: 'sanah' if x=='sanahVEVO' else x)
     df['channel'] = df['channel'].map(lambda x: 'Dobrzewiesz Nagrania' if x=='Pistacho95ldz' else x)
-    st.write('W wyniku usuwania uszkodzonych informacji,', len(list_of_nan), 'pozycji z historii zostało usuniętych')
+    st.write('W wyniku usuwania uszkodzonych informacji,', list_of_nan, 'pozycji z historii zostało usuniętych')
     return df, len(df)
 
 file = st.file_uploader("Tutaj wklej swoją historię")
