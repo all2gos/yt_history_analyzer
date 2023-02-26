@@ -43,6 +43,12 @@ def data_preprocessing(file):
               hour = lambda x: x.time, channel = lambda x: x.subtitles)
     print('Generowanie statystyk trwa. Proszę o cierpliwość ten proces może trwać nawet kilka minut')   
     list_of_nan = 0
+
+    df['year_month'] = df['year_month'].map(lambda x: x[2:7])
+    df['hour'] = df['hour'].map(lambda x: x[11:13])
+    df['time'] = df['time'].map(lambda x: datetime.date(int(x[:4]),int(x[5:7]),int(x[8:10])))
+    df['wideo'] = df['wideo'].map(lambda x: x[11:])
+
     for item in range(len(df)):
         try:
             df['channel'].iloc[item] = df['channel'].iloc[item][0]['name']
@@ -56,12 +62,7 @@ def data_preprocessing(file):
 
     df['channel'] = df['channel'].map(lambda x: 'sanah' if x=='sanahVEVO' else x)
     df['channel'] = df['channel'].map(lambda x: 'Dobrzewiesz Nagrania' if x=='Pistacho95ldz' else x)
-    df['year_month'] = df['year_month'].map(lambda x: x[2:7])
-    df['hour'] = df['hour'].map(lambda x: x[11:13])
-    df['time'] = df['time'].map(lambda x: datetime.date(int(x[:4]),int(x[5:7]),int(x[8:10])))
-    df['wideo'] = df['wideo'].map(lambda x: x[11:])
 
-        
     st.write('W wyniku usuwania uszkodzonych informacji,', list_of_nan, 'pozycji z historii zostało usuniętych')
     return df, len(df)
 
@@ -197,7 +198,8 @@ if file is not None:
             st.pyplot(fig)
 
         if year_month:
-            fig = plt.figure(figsize=(10,4))             
+            fig = plt.figure(figsize=(10,4))    
+            plt.tight_layout()         
             ax = sns.countplot(data=df, x='year_month', hue = var)   
             ax.legend(title=title)  
             ax.set_title('Liczba wyświetleń w zależności od miesiąca')
