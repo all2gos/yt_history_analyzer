@@ -131,6 +131,9 @@ if file is not None:
         except:            
             st.write('Od', df['time'].iloc[-1], 'do', df['time'].iloc[0],'zobaczyłxś',fun[1], 'filmów, co daje ', int(fun[1]/(days_counter.days)), 'zobaczonych filmów dziennie')
         
+        if count != 'Ile topowych filmów ma zawierać lista?':
+            video = st.multiselect('Wybierz filmy, których historię oglądania chcesz prześledzić', (df['wideo'].value_counts()[1:int(count)].to_dict()))
+            st.write(video)
         if top_channel:
             st.write('Najczęściej oglądane kanały w podanym okresie')
             st.write(df['channel'].value_counts())
@@ -150,10 +153,8 @@ if file is not None:
             else:
                 st.write('Coś jest nietak we wpisanych kanałach. Zostaną wyświetlone statystyki dla wszystkich kanałów')     
         except:
-            pass
-        
-        video = st.multiselect('Wybierz filmy, których historię oglądania chcesz prześledzić', (df['wideo'].value_counts()[1:int(count)].to_dict()))
-        st.write(video)
+            pass        
+
         try:
             for char in video:
                 if char in df['wideo'].unique():
