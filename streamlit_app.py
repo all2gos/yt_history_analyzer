@@ -93,7 +93,7 @@ if channel_menu:
 video_menu = st.checkbox('Zaznacz jeśli chcesz sprawdzić statystyki dla konkretnych wideo')
 if video_menu:
     st.write('Żeby ułatwić wprowadzanie nazw filmów, podaj ile top n filmów (pod względem oglądania chcesz zobaczyć), im mniejsza jest podana wartość tym mniej topornie będzie to działać')
-    count = st.number_input('Ile topowych filmów ma zawierać lista?', value=int)   
+    count = st.number_input('Ile topowych filmów ma zawierać lista?')   
 data_choice = st.checkbox('Zaznacz jeśli chcesz sprawdzić statystyki dla specyficznego okresu')
 
 if data_choice:
