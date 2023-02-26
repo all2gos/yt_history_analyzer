@@ -170,7 +170,7 @@ if file is not None:
                 st.write('Najczęściej oglądane wideo')
 
                 st.write(df['wideo'][df['wideo'] != 'film, który został usunięty'].value_counts())
-        var = 'error'
+        var = None
         try:
             if video:
                 var = 'wideo'
