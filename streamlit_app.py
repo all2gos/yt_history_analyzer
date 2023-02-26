@@ -200,7 +200,7 @@ if file is not None:
         if year_month:
             fig = plt.figure(figsize=(20,4))    
             plt.tight_layout()         
-            ax = sns.lineplot(data=df, x='year_month', hue = var, order = sorted(df['year_month'].unique()))   
+            ax = sns.countplot(data=df, x='year_month', hue = var, order = sorted(df['year_month'].unique()))   
             ax.legend(title=title)  
             ax.set_title('Liczba wyświetleń w zależności od miesiąca')
             ax.set_ylabel('Liczba odtworzeń')
