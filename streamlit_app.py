@@ -152,7 +152,7 @@ if file is not None:
         except:
             pass
         
-        video = st.selectbox('Wybierz filmy, których historię oglądania chcesz prześledzić', (df['wideo'].value_counts()[1:100].to_dict()))
+        video = st.multiselect('Wybierz filmy, których historię oglądania chcesz prześledzić', (df['wideo'].value_counts()[1:int(count)].to_dict()))
         st.write(video)
         try:
             for char in video:
