@@ -39,8 +39,8 @@ def data_preprocessing(file):
 
     df = pd.read_json(file)  
     df = df.assign(day_of_week= lambda x: pd.DatetimeIndex(x.time).day_of_week,year= lambda x: pd.DatetimeIndex(x.time).year,
-              month= lambda x: pd.DatetimeIndex(x.time).month,wideo = lambda x: x.title[11:],year_month = lambda x: x.time[:7],
-              hour = lambda x: x.time[11:13], channel = lambda x: x.subtitles)
+              month= lambda x: pd.DatetimeIndex(x.time).month,wideo = lambda x: x.title,year_month = lambda x: x.time,
+              hour = lambda x: x.time, channel = lambda x: x.subtitles)
     print('Generowanie statystyk trwa. Proszę o cierpliwość ten proces może trwać nawet kilka minut')   
     list_of_nan = 0
     for item in range(len(df)):
@@ -48,8 +48,7 @@ def data_preprocessing(file):
             df['channel'].iloc[item] = df['channel'].iloc[item][0]['name']
         except:
             list_of_nan+=1
-        df['time'].iloc[item] = df['time'].iloc[item][:10]
-        df['time'].iloc[item] = datetime.date(int(df['time'].iloc[item][:4]),int(df['time'].iloc[item][5:7]),int(df['time'].iloc[item][8:])) 
+            
         if item % int(len(df)/100)==0:   
             percent_complete+=1
             if percent_complete<101:              
@@ -57,6 +56,12 @@ def data_preprocessing(file):
 
     df['channel'] = df['channel'].map(lambda x: 'sanah' if x=='sanahVEVO' else x)
     df['channel'] = df['channel'].map(lambda x: 'Dobrzewiesz Nagrania' if x=='Pistacho95ldz' else x)
+    df['year_month'] = df['year_month'].map(lambda x: x[:7])
+    df['hour'] = df['hour'].map(lambda x: x[11:13])
+    df['time'] = df['time'].map(lambda x: datetime.date(int(x[:4]),int(x[5:7]),int(x[8:10])))
+    df['wideo'] = df['wideo'].map(lambda x: x[11:])
+
+        
     st.write('W wyniku usuwania uszkodzonych informacji,', list_of_nan, 'pozycji z historii zostało usuniętych')
     return df, len(df)
 
