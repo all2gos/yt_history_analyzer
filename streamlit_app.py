@@ -63,8 +63,8 @@ def data_preprocessing(file):
         df['wideo'].iloc[item] = df['title'].iloc[item][11:]   
         df['time'].iloc[item] = datetime.date(int(df['time'].iloc[item][:4]),int(df['time'].iloc[item][5:7]),int(df['time'].iloc[item][8:]))
 
-        progress_text = "Operation in progress. Please wait."
-        my_bar = st.progress(0, text=progress_text)
+        
+        my_bar = st.progress(0)
 
         
         for i in range(len(df)):   
