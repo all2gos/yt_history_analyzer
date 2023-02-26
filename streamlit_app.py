@@ -63,8 +63,9 @@ def data_preprocessing(file):
         df['time'].iloc[item] = df['time'].iloc[item][:10]
         df['wideo'].iloc[item] = df['title'].iloc[item][11:]   
         df['time'].iloc[item] = datetime.date(int(df['time'].iloc[item][:4]),int(df['time'].iloc[item][5:7]),int(df['time'].iloc[item][8:]))
-        if item == int(len(df)/100):     
-            my_bar.progress(percent_complete + 1) 
+        if item == int(len(df)/100):  
+            percent_complete+=1   
+            my_bar.progress(percent_complete) 
     st.write('W wyniku usuwania uszkodzonych informacji,', len(list_of_nan), 'pozycji z historii zostało usuniętych')
     return df, len(df)
 
