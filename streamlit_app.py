@@ -37,37 +37,29 @@ Aby poddać analizie waszą historię YT musicie dysponować
 #### Właściwy program
 """
 def data_preprocessing(file):
-    df = pd.read_json(file)  
-    df['hour'] = df['time']
-    df['day_of_week'] = pd.DatetimeIndex(df['time']).day_of_week
-    df['year'] = pd.DatetimeIndex(df['time']).year
-    df['month'] = pd.DatetimeIndex(df['time']).month
-    df['year_month'] = df['time']
-    df['wideo'] = df['time']    
-    df['channel'] = df['subtitles']
-    st.write('Generowanie statystyk trwa. Proszę o cierpliwość ten proces może trwać nawet kilka minut')   
-    list_of_nan = []
     percent_complete = 0
     my_bar = st.progress(0)
+
+    df = pd.read_json(file)  
+    df = df.assign(day_of_week= lambda x: pd.DatetimeIndex(x.time).day_of_week,year= lambda x: pd.DatetimeIndex(x.time).year,
+              month= lambda x: pd.DatetimeIndex(x.time).month,wideo = lambda x: x.title[11:],year_month = lambda x: x.time[:7],
+              hour = lambda x: x.time[11:13], channel = lambda x: x.subtitles)
+    print('Generowanie statystyk trwa. Proszę o cierpliwość ten proces może trwać nawet kilka minut')   
+    list_of_nan = 0
     for item in range(len(df)):
         try:
             df['channel'].iloc[item] = df['channel'].iloc[item][0]['name']
         except:
-            list_of_nan.append(item)
-        if df['channel'].iloc[item] == 'sanahVEVO':
-            df['channel'].iloc[item] = 'sanah'
-        if df['channel'].iloc[item] == 'Pistacho95ldz':
-            df['channel'].iloc[item] = 'Dobrzewiesz Nagrania'
-        df['hour'].iloc[item] = df['time'].iloc[item][11:13]
-        df['year_month'].iloc[item] = df['time'].iloc[item][:7]
+            list_of_nan+=1
         df['time'].iloc[item] = df['time'].iloc[item][:10]
-        df['wideo'].iloc[item] = df['title'].iloc[item][11:]   
-        df['time'].iloc[item] = datetime.date(int(df['time'].iloc[item][:4]),int(df['time'].iloc[item][5:7]),int(df['time'].iloc[item][8:]))
+        #df['time'].iloc[item] = datetime.date(int(df['time'].iloc[item][:4]),int(df['time'].iloc[item][5:7]),int(df['time'].iloc[item][8:])) 
         if item % int(len(df)/100)==0:   
             percent_complete+=1
             if percent_complete<101:              
                 my_bar.progress(percent_complete) 
-            
+
+    df['channel'] = df['channel'].map(lambda x: 'sanah' if x=='sanahVEVO' else x)
+    df['channel'] = df['channel'].map(lambda x: 'Dobrzewiesz Nagrania' if x=='Pistacho95ldz' else x)
     st.write('W wyniku usuwania uszkodzonych informacji,', len(list_of_nan), 'pozycji z historii zostało usuniętych')
     return df, len(df)
 
