@@ -21,13 +21,10 @@ Aby poddać analizie waszą historię YT musicie dysponować
 
 """
 """
-#### Aktualizacji 14.01.2023
-###### Dodanie możliwości analizowania przebiegu oglądania kilku wybranych wideo
+#### Aktualizacji 26.02.2023
+###### Poprawienie responsywności strony (pierwsze i nie ostatnie)
+###### Dodanie paska postępu
 
-#### W planach: poprawienie responsywności strony
------------------------------------------------------------------------------------------------
-#### Aktualizacja 7.01.2023
-###### Dodanie możliwości wyboru kilku kanałów żeby porównywać ich statystyki między sobą. Opcja ta jest w pełni kompatybilna z wybieraniem specyficznego okresu
 -----------------------------------------------------------------------------------------------
 ###### Coś nie działa? Masz sugestie co mogę poprawić? Pisz śmiało na stottkoraf@gmail.com
 -------------------------------------------------------------------------------------------------
@@ -72,10 +69,10 @@ top_video = st.checkbox('Najczęściej oglądane filmy')
 
 st.write('Liczbę filmów zobaczonych w danym:')
 year = st.checkbox('roku')
-year_month = st.checkbox('miesiącu')
+year_month = st.checkbox('miesiącu (chwilowo nie działa)')
 month = st.checkbox('rodzaju miesiąca (np. wszystkie stycznie)')
 day = st.checkbox('rodzaju dnia tygodni (np. poniedziałki)')
-hour = st.checkbox('godzinie')
+hour = st.checkbox('godzinie (chwilowo nie działa)')
 
 """
 -------------------------------------------------------------------------------------------------
