@@ -171,7 +171,7 @@ if file is not None:
 
                 st.write(df['wideo'][df['wideo'] != 'film, który został usunięty'].value_counts())
         var = None
-        title = 'awaryjny'
+        title = ''
         try:
             if video:
                 var = 'wideo'
