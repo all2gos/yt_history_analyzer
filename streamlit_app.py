@@ -52,7 +52,7 @@ def data_preprocessing(file):
         except:
             list_of_nan+=1
         df['time'].iloc[item] = df['time'].iloc[item][:10]
-        #df['time'].iloc[item] = datetime.date(int(df['time'].iloc[item][:4]),int(df['time'].iloc[item][5:7]),int(df['time'].iloc[item][8:])) 
+        df['time'].iloc[item] = datetime.date(int(df['time'].iloc[item][:4]),int(df['time'].iloc[item][5:7]),int(df['time'].iloc[item][8:])) 
         if item % int(len(df)/100)==0:   
             percent_complete+=1
             if percent_complete<101:              
