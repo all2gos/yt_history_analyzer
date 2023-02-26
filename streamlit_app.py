@@ -92,8 +92,8 @@ if channel_menu:
     st.write('Jeżeli wpiszesz kanał, który nie występuje w Twojej historii wówczas statystyki dalej będą wyświetalne dla wszystkich kanałów')
 video_menu = st.checkbox('Zaznacz jeśli chcesz sprawdzić statystyki dla konkretnych wideo')
 if video_menu:
-    st.write('UWAGA, TO DZIAŁA BARDZO WOLNO. W przypadku wpisywania większej liczby wideo należy robić to bez żadnych spacji (chyba, że spacje występują w tytule wideo), oddzielając poszczególne kanały średnikiem np. "Nie Kłami;Ed Sheeran - Give Me Love (Official Music Video)" Polecam wyświetlić sobie top oglądane wideo, a następnie do notatki gdzieś przeklejać dokładne nazwy. To bardzo toporne - wiem, dlatego jest w planach wprowadzenie wyświetlania najpopularniejszych wideo w danym okresie, a ta opcja zostanie typowo do śledzenia historii jednego, może dwóch wideo naraz')
-    video = st.text_input('','Wpisz nazwe kanałów (uwaga na literówki)').split(';')
+    st.write('Żeby ułatwić wprowadzanie nazw filmów, podaj ile top n filmów (pod względem oglądania chcesz zobaczyć), im mniejsza jest podana wartość tym mniej topornie będzie to działać')
+    count = st.number_input('Ile topowych filmów ma zawierać lista?')   
 data_choice = st.checkbox('Zaznacz jeśli chcesz sprawdzić statystyki dla specyficznego okresu')
 
 if data_choice:
@@ -151,7 +151,9 @@ if file is not None:
                 st.write('Coś jest nietak we wpisanych kanałach. Zostaną wyświetlone statystyki dla wszystkich kanałów')     
         except:
             pass
-
+        
+        video = st.selectbox('Wybierz filmy, których historię oglądania chcesz prześledzić', (df['wideo'].value_counts()[1:100].to_dict()))
+        st.write(video)
         try:
             for char in video:
                 if char in df['wideo'].unique():
