@@ -60,8 +60,14 @@ def data_preprocessing(file):
             if percent_complete<101:              
                 my_bar.progress(percent_complete) 
 
-    df['channel'] = df['channel'].map(lambda x: 'sanah' if x=='sanahVEVO' else x)
-    df['channel'] = df['channel'].map(lambda x: 'Dobrzewiesz Nagrania' if x=='Pistacho95ldz' else x)
+    corrections = {'sanahVEVO':'sanah', 'Pistacho95ldz':'Dobrzewiesz Nagrania', 'Kwiat Jabłoni - Topic': 'Kwiat Jabłoni',
+    'DawidPodsiadloVEVO':'Dawid Podsiadło','Dawid Podsiadło - Topic':'Dawid Podsiadło', 'Kuchnia WK': 'WarszawskiKoks',
+    'Lekko Nie Będzie': 'Gimper', 'EKIPA WK': 'Warszawski Koks', 'BNT':'Marcin Banot', 'WKDZIK PL':'WarszawskiKoks',
+    'sanah - Topic': 'sanah', 'Męskie Granie Orkiestra 2021 - Topic':'MeskieGranie', 'Wyłącznie Naukowy Bełkot':'Uwaga! Naukowy Bełkot',
+    'Złanimacja':'Dobrzewiesz Nagrania', 'Damian Gwiazda':'Dobrzewiesz Nagrania','Marcin':'Marcin Patrzałek','Marcin Clips':'Marcin Patrzałek',
+    'AsfaltRecords':'Dobrzewiesz Nagrania','MarcinVEVO':'Marcin Patrzałek'}
+    
+    df['channel'] = df['channel'].map(lambda x: corrections[x] if x in corrections else x)
 
     st.write('W wyniku usuwania uszkodzonych informacji,', list_of_nan, 'pozycji z historii zostało usuniętych')
     return df, len(df)
@@ -171,7 +177,7 @@ if file is not None:
         if top_video:
                 st.write('Najczęściej oglądane wideo')
 
-                st.write(df['wideo'][df['wideo'] != 'film, który został usunięty'].value_counts())
+                st.write(df[['wideo','channel']][df['wideo'] != 'ilm, który został usunięty'].value_counts())
         var = None
         title = ''
         try:
