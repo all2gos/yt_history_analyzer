@@ -65,7 +65,8 @@ def data_preprocessing(file):
     'Lekko Nie Będzie': 'Gimper', 'EKIPA WK': 'Warszawski Koks', 'BNT':'Marcin Banot', 'WKDZIK PL':'WarszawskiKoks',
     'sanah - Topic': 'sanah', 'Męskie Granie Orkiestra 2021 - Topic':'MeskieGranie', 'Wyłącznie Naukowy Bełkot':'Uwaga! Naukowy Bełkot',
     'Złanimacja':'Dobrzewiesz Nagrania', 'Damian Gwiazda':'Dobrzewiesz Nagrania','Marcin':'Marcin Patrzałek','Marcin Clips':'Marcin Patrzałek',
-    'AsfaltRecords':'Dobrzewiesz Nagrania','MarcinVEVO':'Marcin Patrzałek'}
+    'AsfaltRecords':'Dobrzewiesz Nagrania','MarcinVEVO':'Marcin Patrzałek', 'mazimazando':'Dobrzewiesz Nagrania', 'szczecinskirap':'Dobrzewiesz Nagrania',
+    'brzycho88':'Dobrzewiesz Nagrania','Numer1st':'Dobrzewiesz Nagrania'}
     
     df['channel'] = df['channel'].map(lambda x: corrections[x] if x in corrections else x)
 
