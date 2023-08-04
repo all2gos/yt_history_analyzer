@@ -119,7 +119,6 @@ if file is not None:
     if compute:        
         fun = data_preprocessing(file)        
         df = fun[0]   
-        st.write(df)     
         try:  
             is_date_exist = begin
             pre_data_df= fun[0]
@@ -154,6 +153,7 @@ if file is not None:
                     part_df = df[df['channel'] == channel[i]]
                     filtered_df = pd.concat([filtered_df,part_df])
                 df = filtered_df
+                st.write(df)
             else:
                 st.write('Coś jest nietak we wpisanych kanałach. Zostaną wyświetlone statystyki dla wszystkich kanałów')     
         except:
