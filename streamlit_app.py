@@ -21,9 +21,9 @@ Aby poddać analizie waszą historię YT musicie dysponować
 
 """
 """
-#### Aktualizacji 26.02.2023
-###### Znaczne poprawienie responsywności strony
-###### Dodanie paska postępu
+#### Aktualizacji 15.07.2024
+###### Projekt jest zawieszony ze względu na odkrycie sposobu działania historii YT: historia YT zapisuje dokładnie jedno odtworzenie filmu w trakcie jednego dnia, niezależenie od tego ile razy ten film został przez nas wyświetlony i na jak długo (przez co przewijanie strony głównej na YT jest w stanie zapisać w historii pozycje, których nie oglądaliśmy)
+###### Zostawiam tę stronę w takiej postaci, ale uczulam na jej ograniczenia
 
 -----------------------------------------------------------------------------------------------
 ###### Coś nie działa? Masz sugestie co mogę poprawić? Pisz śmiało na stottkoraf@gmail.com
